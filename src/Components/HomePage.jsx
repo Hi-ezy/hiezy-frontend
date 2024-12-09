@@ -1,8 +1,11 @@
 import React from 'react'
+import VideoInterviewApp from './VideoInterview/VideoInterview'
 
 const HomePage = () => {
   return (
-    <div className='text-5xl text-red-500'>HomePage</div>
+    <div>
+    <VideoInterviewApp />
+    </div>
   )
 }
 
