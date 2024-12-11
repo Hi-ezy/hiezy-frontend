@@ -85,6 +85,8 @@ const AIGirl = () => {
       >
         Speak
       </button>
+      <textarea className="w-full h-32 p-2 border rounded"
+                    placeholder="Ai response will be here" />
     </div>
   );
 };
