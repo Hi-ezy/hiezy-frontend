@@ -1,10 +1,12 @@
 import React from 'react'
 import VideoInterviewApp from './VideoInterview/VideoInterview'
+import SpeechTest from './VideoInterview/Speechtext'
 
 const HomePage = () => {
   return (
     <div>
-    <VideoInterviewApp />
+    {/* <VideoInterviewApp /> */}
+    <SpeechTest />
     </div>
   )
 }
