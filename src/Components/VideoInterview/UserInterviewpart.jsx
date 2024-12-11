@@ -2,10 +2,11 @@ import React, { useRef, useState } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import AIGirl from './AIgirlBot';
 
-const CandidateView = () => {
+const CandidateView = ({setCandidateResponse}) => {
     const [isRecording, setIsRecording] = useState(false);
+    const [inputText, setInputText] = useState("")
     const videoRef = useRef(null);
-
+    const textareaRef = useRef();
     // Speech Recognition Hook
     const {
         transcript,
@@ -50,7 +51,13 @@ const CandidateView = () => {
     if (!browserSupportsSpeechRecognition) {
         return <p>Your browser does not support speech recognition.</p>;
     }
-
+    const handleText = (e)=>{
+      e.preventDefault()
+      // console.log(inputText)
+      setCandidateResponse(inputText);
+      setInputText("")
+      textareaRef.current.value = '';
+    }
     return (
       <div className="flex flex-col h-screen w-full">
       {/* Video Section */}
@@ -73,9 +80,12 @@ const CandidateView = () => {
       {/* Transcription Area */}
       <div className="flex flex-col p-4">
         <textarea
+        // name={"candidateInput"}
+        ref={textareaRef}
           defaultValue={transcript}
           className="w-full h-32 p-2 border rounded"
           placeholder="Your speech will appear here..."
+          onChange={(e)=>setInputText(e.target.value.toString())}
         />
         <div className="flex flex-row justify-between">
 
@@ -86,7 +96,7 @@ const CandidateView = () => {
           Reset Transcript
         </button>
         <button
-          onClick={resetTranscript}
+          onClick={(e)=>handleText(e)}
           className="mt-2 w-1/5 bg-blue-500 text-white p-2 rounded"
         >
           Send

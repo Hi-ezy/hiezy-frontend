@@ -1,57 +1,37 @@
-// import React, { useEffect, useRef } from 'react';
-// import { useSpeechSynthesis } from 'react-speech-kit';
 
-// const AIGirl = () => {
-//     const { speak } = useSpeechSynthesis();
-//     console.log("speak", speak)
-//   const videoRef = useRef(null);
-
-//   const handleSpeak = () => {
-//     speak({ text: "Hello! I am your AI assistant." });
-//     // console.log(speak)
-//     if (videoRef.current) {
-//       videoRef.current.play();
-//     }
-//   };
-
-//   useEffect(() => {
-//     const video = videoRef.current;
-//     if (video) {
-//       video.addEventListener('ended', () => {
-//         video.pause();
-//         video.currentTime = 0;
-//       });
-//     }
-//   }, []);
-
-//   return (
-//     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-//       <video
-//         ref={videoRef}
-//         className="w-64 h-64"
-//         loop
-//         muted
-//         src="/assets/video_interview_model.mp4"
-//       />
-//       <button
-//         onClick={handleSpeak}
-//         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-//       >
-//         Speak
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default AIGirl;
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import 'tailwindcss/tailwind.css';
-
-const AIGirl = () => {
+import useAiConversion from './video-interview-daa-fetch.js/ai-bot-data';
+const AIGirl = ({candidateResponse}) => {
+  const {getAIResponse}  = useAiConversion()
   const { speak } = useSpeechSynthesis();
+  const[aiResponse, setAiResponse] = useState("")
   const videoRef = useRef(null);
 
+  useEffect(() => {
+    const fetchAIResponse = async () => {
+      const p_body = {
+        question: candidateResponse,
+        sessionID: '1733852441807',
+        phase: 'interaction',
+      };
+
+      const data = await getAIResponse(JSON.stringify(p_body));
+      if (data) {
+        setAiResponse(data.response); // Assuming `response` contains the AI's answer
+        handleSpeak(data.response)
+      }
+    };
+
+    if (candidateResponse) {
+      fetchAIResponse();
+    }
+
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  }, [candidateResponse, getAIResponse]);
   const handleSpeak = (text) => {
     console.log("u r here")
     const prompt =
@@ -64,10 +44,16 @@ const AIGirl = () => {
   };
 
   useEffect(() => {
+    const p_body = {
+      "question": candidateResponse,
+      "sessionID":"1733852441807",
+      "phase":"interaction"
+  }
+    const AIresponse = getAIResponse(JSON.stringify(p_body))
     if (videoRef.current) {
       videoRef.current.play();
-    }
-  }, []);
+    } 
+  }, [candidateResponse]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
@@ -75,18 +61,20 @@ const AIGirl = () => {
         ref={videoRef}
         className="w-64 h-64"
         autoPlay
-        loop
+        // loop
         muted
         src="/assets/video_interview_model.mp4"
       />
-      <button
-        onClick={() => handleSpeak("Hi Pratibha and milind. you are made for each other")}
+      {/* <button
+        onClick={() => handleSpeak(AIresponse?.response)}
         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
       >
         Speak
-      </button>
+      </button> */}
       <textarea className="w-full h-32 p-2 border rounded"
-                    placeholder="Ai response will be here" />
+      value={aiResponse}
+       placeholder="Ai response will be here" />
+       
     </div>
   );
 };

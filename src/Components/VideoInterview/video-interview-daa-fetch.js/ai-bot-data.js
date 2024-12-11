@@ -1,35 +1,39 @@
+
+import { useState, useCallback } from 'react';
 const BASEURL = process.env.REACT_APP_BASE_URL
+const useAiConversion = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-const useAiConversion =()=>{
-  
-  // const navigate = useNavigate();
+  const getAIResponse = useCallback(async (payload) => {
+    setLoading(true);
+    setError(null);
 
-  const getAIResponse = async ({data}) => {
     try {
-      // setLoading(true);
-      const response = await fetch(
-        `${BASEURL}/app/ai/question`,
-        {
-            body:data,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch( `${BASEURL}/app/ai/question`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: payload,
+      });
 
-      const result = await response.json();
-     
-      let aiResponse = result?.data;
-      
-      return aiResponse;
-      
-      
+      if (!response.ok) {
+        throw new Error('Failed to fetch AI response');
+      }
+
+      const data = await response.json();
+      setLoading(false);
+      return data;
     } catch (err) {
-      console.log(err)
+      setLoading(false);
+      setError(err.message || 'Something went wrong');
+      console.error(err);
+      return null;
     }
-  };
-      
-  return { getAIResponse}
-}
+  }, []);
+
+  return { getAIResponse, loading, error };
+};
 
 export default useAiConversion;
