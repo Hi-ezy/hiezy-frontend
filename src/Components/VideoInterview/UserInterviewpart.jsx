@@ -1,65 +1,60 @@
 import React, { useRef, useState } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import AIGirl from './AIgirlBot';
 
-const CandidateView = ({setCandidateResponse}) => {
-    const [isRecording, setIsRecording] = useState(false);
-    const [inputText, setInputText] = useState("")
-    const videoRef = useRef(null);
-    const textareaRef = useRef();
-    // Speech Recognition Hook
-    const {
-        transcript,
-        listening,
-        resetTranscript,
-        browserSupportsSpeechRecognition,
-    } = useSpeechRecognition();
-    
-    const startVideo = async () => {
-      // Start user video stream
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      videoRef.current.srcObject = stream;
-      setIsRecording(true);
+const CandidateView = ({ setCandidateResponse }) => {
+  const [isRecording, setIsRecording] = useState(false);
+  const [isTranscribing, setIsTranscribing] = useState(false);
+  const [inputText, setInputText] = useState("");
+  const videoRef = useRef(null);
 
-      // Start speech recognition
-      // SpeechRecognition.startListening({ continuous: true, language: 'en-US' });
-      // console.log(SpeechRecognition)
+  // Speech Recognition Hook
+  const {
+    transcript,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  const startVideo = async () => {
+    // Start user video stream
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    videoRef.current.srcObject = stream;
+    setIsRecording(true);
   };
-  
-    const startTranscripting = () => {
-        console.log("start transcripting")
-        SpeechRecognition.startListening({ continuous: true, language: 'en-US' });
-    };
-    const stopTranscripting = () => {
-        console.log("stop transcripting")
-        SpeechRecognition.stopListening();
-    };
 
-    const stopVideo = () => {
-        // Stop user video stream
-        const stream = videoRef.current.srcObject;
-        const tracks = stream.getTracks();
-        tracks.forEach(track => track.stop());
-        videoRef.current.srcObject = null;
-        setIsRecording(false);
+  const stopVideo = () => {
+    // Stop user video stream
+    const stream = videoRef.current.srcObject;
+    if (stream) {
+      const tracks = stream.getTracks();
+      tracks.forEach((track) => track.stop());
+      videoRef.current.srcObject = null;
+    }
+    setIsRecording(false);
+  };
 
-        // Stop speech recognition
-        SpeechRecognition.stopListening();
-    };
-
-    // Check if browser supports Speech Recognition
+  const startTranscription = () => {
     if (!browserSupportsSpeechRecognition) {
-        return <p>Your browser does not support speech recognition.</p>;
+      alert("Your browser does not support speech recognition.");
+      return;
     }
-    const handleText = (e)=>{
-      e.preventDefault()
-      // console.log(inputText)
-      setCandidateResponse(inputText);
-      setInputText("")
-      textareaRef.current.value = '';
-    }
-    return (
-      <div className="flex flex-col h-screen w-full">
+    setIsTranscribing(true);
+    SpeechRecognition.startListening({ continuous: true, language: 'en-US' });
+  };
+
+  const stopTranscription = () => {
+    setIsTranscribing(false);
+    SpeechRecognition.stopListening();
+  };
+
+  const handleText = (e) => {
+    e.preventDefault();
+    setCandidateResponse(inputText || transcript);
+    setInputText(""); // Clear manual input
+    resetTranscript(); // Clear transcript
+  };
+
+  return (
+    <div className="flex flex-col h-screen w-full">
       {/* Video Section */}
       <div className="flex flex-col items-center p-4">
         <video
@@ -67,58 +62,66 @@ const CandidateView = ({setCandidateResponse}) => {
           autoPlay
           className="w-full h-3/4 border border-gray-300 rounded"
         />
-        {isRecording && (
+        {isRecording ? (
           <button
             onClick={stopVideo}
             className="mt-4 bg-red-500 text-white p-2 rounded"
           >
             Stop Video
           </button>
+        ) : (
+          <button
+            onClick={startVideo}
+            className="mt-4 bg-blue-500 text-white p-2 rounded"
+          >
+            Start Video
+          </button>
         )}
       </div>
-    
+
+      {/* Transcription Control */}
+      <div className="flex gap-4 mb-4 justify-center">
+        <button
+          className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+          onClick={startTranscription}
+          disabled={isTranscribing}
+        >
+          Start Transcription
+        </button>
+        <button
+          className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+          onClick={stopTranscription}
+          disabled={!isTranscribing}
+        >
+          Stop Transcription
+        </button>
+      </div>
+
       {/* Transcription Area */}
       <div className="flex flex-col p-4">
         <textarea
-        // name={"candidateInput"}
-        ref={textareaRef}
-          defaultValue={transcript}
+          value={transcript || inputText}
+          onChange={(e) => setInputText(e.target.value)}
           className="w-full h-32 p-2 border rounded"
           placeholder="Your speech will appear here..."
-          onChange={(e)=>setInputText(e.target.value.toString())}
         />
         <div className="flex flex-row justify-between">
-
-        <button
-          onClick={resetTranscript}
-          className="mt-2 w-1/5 bg-yellow-500 text-white p-2 rounded"
-        >
-          Reset Transcript
-        </button>
-        <button
-          onClick={(e)=>handleText(e)}
-          className="mt-2 w-1/5 bg-blue-500 text-white p-2 rounded"
-        >
-          Send
-        </button>
-        </div>
-      </div>
-    
-      {/* Start Interview Button */}
-      {!isRecording && (
-        <div className="flex justify-end p-4">
           <button
-            onClick={startVideo}
-            className="bg-blue-500 text-white p-2 rounded"
+            onClick={resetTranscript}
+            className="mt-2 w-1/5 bg-yellow-500 text-white p-2 rounded"
           >
-            Start Interview
+            Reset Transcript
+          </button>
+          <button
+            onClick={(e) => handleText(e)}
+            className="mt-2 w-1/5 bg-blue-500 text-white p-2 rounded"
+          >
+            Send
           </button>
         </div>
-      )}
+      </div>
     </div>
-    
-    
-    );
+  );
 };
 
 export default CandidateView;
