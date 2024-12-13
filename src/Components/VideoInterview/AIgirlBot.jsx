@@ -8,12 +8,12 @@ const AIGirl = ({ candidateResponse }) => {
   const { speak } = useSpeechSynthesis();
   const [aiResponse, setAiResponse] = useState("");
   const videoRef = useRef(null);
-
+const sessionId = localStorage.getItem("sessionId")
   useEffect(() => {
     const fetchAIResponse = async () => {
       const p_body = {
         question: candidateResponse,
-        sessionID: '1733935802390',
+        sessionID: sessionId,
         phase: 'interaction',
       };
 
