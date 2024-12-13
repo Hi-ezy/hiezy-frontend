@@ -4,6 +4,7 @@ import VideoInterviewApp from './Components/VideoInterview/VideoInterview'
 import CandidateUploader from './Components/CandidateShortlisting/CandidateShortlisting';
 import HomePage from './Components/HomePage';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import LoginPage from './Components/LoginPage/LoginPage.jsx';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/interview" element={<HomePage />} />
         <Route path="/hr" element={<CandidateUploader />} />
         <Route path="/video-interview" element={< VideoInterviewApp/>} />
+        <Route path="/login" element={< LoginPage/>} />
       </Routes>
     </Router>
     </div>
