@@ -14,6 +14,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/interview" element={<VideoInterviewApp />} />
         <Route path="/hr" element={<CandidateUploader />} />
         <Route path="/video-interview" element={< VideoInterviewApp/>} />
         <Route path="/login" element={< LoginPage/>} />

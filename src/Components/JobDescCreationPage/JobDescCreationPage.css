@@ -69,7 +69,7 @@ h1 {
 }*/
 
 /* Basic resets */
-.jd-wrapper {
+/*.jd-wrapper {
     width: 60vw;
     margin: 50px auto;
     padding: 20px;
@@ -165,4 +165,193 @@ select {
 
 .Jd-complete:hover {
     background-color: #0066cc;
+}*/
+/* Main Container */
+.jobDesc-ui-container {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
 }
+.top-bar {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Left Section - Logo and Menu Icon */
+.top-bar-left {
+  display: flex;
+  align-items: center;
+}
+.logo {
+  height: 30px;
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+}
+.user-avatar {
+  background-color: #1da1f2;
+  color: white;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+/* Chat Section */
+.chat-section {
+  width: 50%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header {
+  margin-bottom: 10px;
+  height : 60%;
+}
+
+.new-jd-button {
+  position:fixed;
+  top : 10vh;
+  left :8vw;
+  background-color:#fff;
+  color: #333;
+  border: #333;
+  border-radius: 20px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  self-align :left;
+}
+
+.chat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chat-message p {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align :left;
+}
+
+.chat-message-reply p {
+  background-color: #2dd3c5;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align :right;
+}
+
+.chat-buttons button {
+  margin-right: 10px;
+  background-color: #f3f3f3;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.chat-buttons button:hover {
+  background-color: #e0e0e0;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+}
+
+.send-button {
+  background-color: #2dd3c5;
+  color: #fff;
+  border: none;
+  margin-left: 10px;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Promo Section */
+.promo-section {
+  width: 50%;
+  background: url('../Assets/women_hr.jpg') center/cover no-repeat;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.promo-background {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.promo-background h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.promo-background p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+.back-btn {
+  position:fixed;
+  top : 10vh;
+  left :2vw;
+  background-color:#fff;
+  color: #333;
+  border: #333;
+  border-radius: 20px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  self-align :left;
+}
+.submit-button {
+  position:relative;
+  background-color:#2dd3c5;
+  color: #333;
+  border: #333;
+  border-radius: 20px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  justify-content: center;
+  text-align: center;
+  self-align:center;
+}
+

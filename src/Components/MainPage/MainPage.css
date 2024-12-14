@@ -1,5 +1,5 @@
 
-.search-div {
+/*.search-div {
     position: fixed;
     top: 10%;
     left: 0;
@@ -89,64 +89,80 @@
   
   .search-wrapper .pagination button:hover {
     background-color: #f5f5f5;
+  }*/
+  
+  .jd-grid-page {
+   margin-top: 5vh;
+   padding: 40px;
+   text-align: center;
+  }
+  .jd-grid-page h2 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
+  .jd-button {
+    position:absolute;
+    top: 10vh;
+    right : 2vw;
+    padding: 12px;
+    background-color: #36b3a8;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    self-align :left;
   }
   
-  .main-page{
-    position: fixed;
-    top: 10%;
-    left: 17%;
-    background-color: transparent;
-    width: 83%;
-    height: 90%;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  .jd-button:hover {
+    color: green;
   }
   
-  .main-page .tiles-main {
+  .jd-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 3fr); 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-  
-    }
-    .main-page .tiles-main .new-tile{
-      background-color: #fff;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s ease, background-color 0.3s ease;
-    }
-    .main-page .tiles-main  .new-tile:hover {
-      background-color:rgb(13, 118, 52);
   }
   
-    
-    .main-page .tiles-main .tile{
-      background-color: #fff;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s ease, background-color 0.3s ease;
+   .jd-card{
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.3s ease;
     }
   
-    .main-page .tiles-main  .tile:hover {
-      background-color:rgb(132, 15, 241);
+    .jd-card:hover {
+      transform: translateY(-5px);
+  }
+  .jd-card h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .jd-card h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .jd-card p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
   }
   
-  .main-page .main-pagination {
-      margin-top: 20px;
+  /*.jd-grid-page .main-pagination {
       text-align: center;
       position: fixed;
-      bottom :3vh;
-      right : 3vw;
+      right :2vh;
+      top : 3vw;
       padding: 10px;
     }
     
-    .main-page .main-pagination button {
+    .jd-grid-page .main-pagination button {
       width: 100px;
       height: 30px;
       padding: 5px;
@@ -156,10 +172,10 @@
       cursor: pointer;
     }
     
-    .main-page .main-pagination button:hover {
+    .jd-grid-page .main-pagination button:hover {
       background-color: #f5f5f5;
     }
-
+*/
 
 /*
 * {
@@ -174,7 +190,7 @@ body {
   color: #333;
 }
 
-.main-page {
+.jd-grid-page {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;

@@ -1,4 +1,4 @@
-* { 
+/** { 
     margin : 0;
     padding : 0 ;
     box-sizing : Border-box;
@@ -135,4 +135,173 @@ form .login-register {
     cursor: pointer;
     font-size: 18px;
     color: #666;
+  }*/
+
+  /* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
   }
+  
+  /* Container */
+  .login-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 70%;
+    margin: 50px auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Left Panel (Login) */
+  .login-left {
+    padding: 40px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+  }
+  
+  ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input[type="email"],
+  input[type="password"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .continue-btn {
+    padding: 12px;
+    background-color: #36b3a8;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    self-align :right;
+  }
+  
+  .continue-btn:hover {
+    background-color: #2d9989;
+  }
+  
+  /* Social Login Buttons */
+  .social-login {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .google-btn {
+    background-color: white;
+  }
+  
+  .apple-btn {
+    background-color: black;
+    color: white;
+  }
+  
+  .social-btn img {
+    width: 20px;
+    margin-right: 10px;
+  }
+  
+  .forgot-password {
+    font-size: 14px;
+    color: #6b6b6b;
+    margin-bottom: 20px;
+  }
+  
+  .signup-link {
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .terms {
+    font-size: 12px;
+    color: #6b6b6b;
+  }
+  
+  .terms a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  /* Right Panel (Promo Image & Bubble) */
+  .login-right {
+    position: relative;
+    width: 50%;
+    background-image: url('../Assets/women_hr.jpg');
+    background-size: cover;
+    background-position: center;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  
+  .bubble-message {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 200px;
+  }
+  
+  .promo-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0 10px 10px 0;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .close-btn:hover {
+    color: red;
+  }
+  

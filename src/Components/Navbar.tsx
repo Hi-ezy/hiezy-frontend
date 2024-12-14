@@ -16,7 +16,7 @@ export default function Navbar() {
             <a href="#how-it-works" className="text-gray-600 hover:text-indigo-600">How it Works</a>
             <a href="#testimonials" className="text-gray-600 hover:text-indigo-600">Testimonials</a>
             <button className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700" onClick={() => { window.location.href = "./login"; }}>
-              Login 
+              Employer Login 
             </button>
           </div>
           
