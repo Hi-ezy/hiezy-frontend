@@ -5,6 +5,8 @@ import CandidateUploader from './Components/CandidateShortlisting/CandidateShort
 import HomePage from './Components/HomePage';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from './Components/LoginPage/LoginPage.jsx';
+import MainPage from './Components/MainPage/MainPage.jsx';
+import { JobDescCreationPage } from './Components/JobDescCreationPage/JobDescCreationPage.jsx';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path="/hr" element={<CandidateUploader />} />
         <Route path="/video-interview" element={< VideoInterviewApp/>} />
         <Route path="/login" element={< LoginPage/>} />
+        <Route path='/MainPage' element={<MainPage/>} />
+        <Route path='/JDcreation' element={<JobDescCreationPage/>} />
       </Routes>
     </Router>
     </div>

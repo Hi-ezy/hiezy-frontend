@@ -1,3 +1,4 @@
+
 .wrapper{
     Position :relative;
     height : 420px;
@@ -102,3 +103,13 @@ form .login-register {
 .login-register p a:hover {
     text-decoration: underline;
 }
+
+.eye {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+  }

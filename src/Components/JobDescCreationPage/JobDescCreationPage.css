@@ -1,0 +1,167 @@
+/*.jd-wrapper {
+  position: fixed;
+  top: 10vh;
+  left: 30vw;
+  height: 80vh;
+  width: 40vw;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(30px);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+h1 {
+  font-size: 36px;
+  text-align: center;
+}
+
+.input-box {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  margin: 30px 0;
+  color: #fff;
+  text-align: left;
+}
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  background: transparent;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  border-color: #fff;
+  padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder {
+  color: #fff;
+}
+
+.Jd-complete {
+  width:30%;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.Jd-complete:hover {
+  background-color: #444;
+}*/
+
+/* Basic resets */
+.jd-wrapper {
+    width: 60vw;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #2a8bf2;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-box {
+    margin-bottom: 20px;
+}
+
+.input-box label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+    text-align:left;
+}
+.input-box input{
+    color: #333;
+}
+
+.input-box input::placeholder{
+    color: #333;
+}
+
+.input-box input,
+.input-box select{
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+.input-box textarea {
+    resize: vertical;
+    width: 100%;
+    padding: 12px;
+    height :72px; 
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+
+.input-box input:focus,
+.input-box select:focus,
+.input-box textarea:focus {
+    border-color: #2a8bf2;
+}
+
+
+select {
+    appearance: none;
+    background: #fff url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><polygon fill="%23333" points="12,6 8,10 4,6 "/></svg>') no-repeat right 12px center;
+    background-size: 12px;
+}
+
+.Jd-complete {
+    position: center; 
+    width: 20vw;
+    margin-top: 30px;
+    background-color: #2a8bf2;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center;
+}
+
+.Jd-complete:hover {
+    background-color: #0066cc;
+}

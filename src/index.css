@@ -15,8 +15,7 @@ body {
   justify-content : center;
   align-items : center;
   min-height : 100vh; 
-  background : url(../public/assets/Heizy_bx.jpg)
-  no-repeat;
+  background : url('../public/assets/Heizy_by.jpg') no-repeat;
   background-size :cover;
   background-position :center;
 }
