@@ -50,13 +50,14 @@ export const LoginPage = () => {
                 <a href="#">Forgot Password</a>
             </div>
 
-            <button type='submit' onClick={handleFormSubmit}>Login</button>
+            {/*<button type='submit' onClick={handleFormSubmit}>Login</button>*/}
+            <button type='submit' onClick={() => { window.location.href = "/MainPage"; }}>Login</button>
 
             <div className="login-register">
                 <p>Don't have an account? <a href="#"> Register </a></p>
             </div>
 
-            {errorState && <p className="error">Invalid username or password</p>}
+            {/*{errorState && <p className="error">Invalid username or password</p>}*/}
 
 
         </form>

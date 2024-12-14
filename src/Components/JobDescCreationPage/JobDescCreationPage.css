@@ -151,6 +151,7 @@ select {
     position: center; 
     width: 20vw;
     margin-top: 30px;
+    margin-left : 60px;
     background-color: #2a8bf2;
     color: #fff;
     border: none;

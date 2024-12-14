@@ -97,9 +97,14 @@ export const JobDescCreationPage = () => {
               </div>
   
               {/* Submit Button */}
+              <div>
+                <button type='cancel' className='Jd-complete' onClick={() => { window.location.href = "/MainPage" }}>
+                  Cancel 
+              </button>
               <button type='submit' className='Jd-complete' onClick={() => { window.location.href = "/MainPage" }}>
                   Complete
               </button>
+              </div>
           </form>
       </div>
     )

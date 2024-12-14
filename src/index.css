@@ -11,13 +11,13 @@ body {
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
+  /*display: flex;
   justify-content : center;
   align-items : center;
-  min-height : 100vh; 
+  /min-height : 100vh; 
   background : url('../public/assets/Heizy_by.jpg') no-repeat;
   background-size :cover;
-  background-position :center;
+  background-position :center;*/
 }
 
 code {
