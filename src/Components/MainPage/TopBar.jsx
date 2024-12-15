@@ -6,7 +6,7 @@ export default function TopBar (){
     <div className="top-bar">
       {/* Left Section - Logo */}
       <div className="top-bar-left">
-        <img src="Hiezy_logo.png" alt="Hiezy Logo" className="logo" />
+        <img src="Hiezy_logo.jpg" alt="Hiezy Logo" className="logo" />
       </div>
 
       {/* Center Section - Search */}

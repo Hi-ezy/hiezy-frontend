@@ -98,7 +98,7 @@ export const JobDescCreationPage = () => {
     <div className="jobDesc-ui-container">
         <div className="top-bar">
             <div className="top-bar-left">
-                <img src="Hiezy_logo.png" alt="Hiezy Logo" className="logo" />
+                <img src="Hiezy_logo.jpg" alt="Hiezy Logo" className="logo" />
              </div>
             <div className="top-bar-right">
                  <div className="user-avatar">D</div>
