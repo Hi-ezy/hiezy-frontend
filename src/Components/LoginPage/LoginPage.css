@@ -1,0 +1,308 @@
+/** { 
+    margin : 0;
+    padding : 0 ;
+    box-sizing : Border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    justify-content : center;
+    align-items : center;
+    /min-height : 100vh; 
+    background : url('../Assets/Heizy_by.jpg') no-repeat;
+    background-size :cover;
+    background-position :center;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+.wrapper{
+    Position :relative;
+    height : 420px;
+    width : 350px;
+    background :transparent;
+    border : 2px solid rgba(255,255,255,.2);
+    backdrop-filter: blur(30px);
+    border-radius : 10px;
+    box-shadow :0 0 10px rgba(0,0,0,.2);
+    display :flex;
+    color : #fff;
+    align-item :center;
+    justify-content: center;
+    margin: auto;
+}
+
+form  h1{
+    font-size : 36px;
+    text-allign : center;
+}
+form .input-box{
+    position : relative;
+    width : 100%;
+    height : 50px;
+    margin : 30px 0;
+}
+
+.input-box input{
+    width :100%;
+    height:100%;
+    color: #fff;    
+    background: transparent;
+    outline:none;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 40px;
+    border-color: #fff;
+    padding : 20px 45px 20px 20px ;
+}
+.input-box input::placeholder {
+    color: #fff;
+}
+
+.input-box .icon {
+    position: absolute;
+    right : 20px;
+    top : 50%;
+    transform : translateY(-50%);
+    font-size : 16px;
+    color: #fff;
+}
+
+form .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size : 14.5px;
+    margin : -15px 0 15px;
+
+}
+
+.remember-forgot label input {
+    accent-color : #fff;
+    margin-right : 4px;
+    padding : 5px;
+}
+
+.remember-forgot a {
+    color: #fff;
+    margin-left: 15px;
+    text-decoration : none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+form button {
+    width :100%;
+    height: 45px;
+    background : #fff;
+    border :none;
+    outline :none;
+    border-radius: 40px;
+    box-shadow : 0 0 10 px rgba (0,0,0,0.1) ;
+    cursor : pointer;
+    font-size : 16px ;
+    color : #333;
+    font-weight : 700; 
+}
+
+form .login-register {
+    font-size : 14.5px;
+    text-align : center;
+    margin-top : 20px 0 15px;
+}
+
+.login-register p a {
+    color: #fff;
+    text-decoration :none;
+    font-weight :600; 
+}
+
+.login-register p a:hover {
+    text-decoration: underline;
+}
+
+.eye {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+  }*/
+
+  /* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+  }
+  
+  /* Container */
+  .login-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 70%;
+    margin: 50px auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Left Panel (Login) */
+  .login-left {
+    padding: 40px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+  }
+  
+  ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input[type="email"],
+  input[type="password"], 
+  input[type= "text"]{
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .continue-btn {
+    padding: 12px;
+    background-color: #36b3a8;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    self-align :right;
+  }
+  
+  .continue-btn:hover {
+    background-color: #2d9989;
+  }
+  
+  /* Social Login Buttons */
+  .social-login {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .google-btn {
+    background-color: white;
+  }
+  
+  .apple-btn {
+    background-color: black;
+    color: white;
+  }
+  
+  .social-btn img {
+    width: 20px;
+    margin-right: 10px;
+  }
+  
+  .forgot-password {
+    font-size: 14px;
+    color: #6b6b6b;
+    margin-bottom: 20px;
+  }
+  
+  .signup-link {
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .terms {
+    font-size: 12px;
+    color: #6b6b6b;
+  }
+  
+  .terms a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  /* Right Panel (Promo Image & Bubble) */
+  .login-right {
+    position: relative;
+    width: 50%;
+    background-image: url('../Assets/women_hr.jpg');
+    background-size: cover;
+    background-position: center;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  
+  .bubble-message {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 200px;
+  }
+  
+  .promo-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0 10px 10px 0;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .close-btn:hover {
+    color: red;
+  }
+  
