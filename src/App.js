@@ -10,6 +10,7 @@ function App() {
     <div className="App">
     <Router>
       <Routes>
+        <Route path='/' element={ <WelcomeComponent/> }/>
         <Route path="/interview" element={<HomePage />} />
         <Route path="/hr" element={<CandidateUploader />} />
         <Route path="/video-interview" element={< VideoInterviewApp/>} />
@@ -18,5 +19,9 @@ function App() {
     </div>
   );
 }
-
+const WelcomeComponent =()=>{
+  return (
+    <h1>Welcome to HiEzy</h1>
+  )
+}
 export default App;
