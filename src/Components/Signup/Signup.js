@@ -4,7 +4,7 @@ export default async function TriggerSignup(email, name, password) {
 
     console.log(email, name, password);
     try{
-    const response = await fetch(`${BASEURL}/signup`, {
+    const response = await fetch(`${BASEURL}/app/user/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

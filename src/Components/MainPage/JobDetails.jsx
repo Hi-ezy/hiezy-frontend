@@ -20,8 +20,8 @@ const JobDetails = () => {
       <div className="sidebar">
         <h2 className="sidebar-title">Hiezy</h2>
         <ul className="sidebar-menu">
-          <li onClick={() => window.location.href = '/MainPage/Dashboard'}className="sidebar-item">Dashboard</li>
-          <li onClick={() => window.location.href = '/MainPage/Jobs '}className="sidebar-item active">Jobs</li>
+          <li onClick={() => window.location.href = '/dashboard'}className="sidebar-item">Dashboard</li>
+          <li onClick={() => window.location.href = '/jobs '}className="sidebar-item active">Jobs</li>
         </ul>
       </div>
 

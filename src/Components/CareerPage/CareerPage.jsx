@@ -22,7 +22,7 @@ const CareerPage = () => {
               <p>{job.location}</p>
               <p>{job.type}</p>
               <button onClick={() => {
-                 window.location.href = `/ResumeSubmit/:${job.jobid}`;}} className="apply-btn">Apply Now</button>
+                 window.location.href = `/resume-submit/:${job.jobid}`;}} className="apply-btn">Apply Now</button>
             </div>
           ))}
         </div>

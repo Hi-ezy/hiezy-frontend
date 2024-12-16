@@ -46,7 +46,7 @@ const Jobs = () => {
       <div className="sidebar">
         <h2 className="sidebar-title">Hiezy</h2>
         <ul className="sidebar-menu">
-          <li onClick={() => window.location.href = '/MainPage/Dashboard'} className="sidebar-item">Dashboard</li>
+          <li onClick={() => window.location.href = 'dashboard'} className="sidebar-item">Dashboard</li>
           <li className="sidebar-item active">Jobs</li>
         </ul>
       </div>
@@ -77,7 +77,7 @@ const Jobs = () => {
               </div>
               <div className="job-actions">
                <button onClick={() => {
-                 window.location.href = `/MainPage/JobDetails/${job.jobid}`;}} className="view-job">View Job</button>
+                 window.location.href = `job-details/${job.jobid}`;}} className="view-job">View Job</button>
                 <button className="unpublish">Unpublish</button>
               </div>
             </div>

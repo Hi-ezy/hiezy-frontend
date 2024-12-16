@@ -8,7 +8,7 @@ const Dashboard = () => {
         <h2 className="sidebar-title">Heizy</h2>
         <ul className="sidebar-menu">
           <li className="sidebar-item active">Dashboard</li>
-          <li onClick={() => window.location.href = '/MainPage/Jobs'} className="sidebar-item">Jobs</li>
+          <li onClick={() => window.location.href = '/jobs'} className="sidebar-item">Jobs</li>
         </ul>
       </div>
 

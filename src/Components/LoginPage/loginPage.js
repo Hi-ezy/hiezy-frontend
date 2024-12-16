@@ -12,7 +12,7 @@ export const handleSubmit = async (event, email, password, setErrorState) => {
 
     //api logic
     console.log('email :'+email,'password1 :'+password);
-    var response = await fetch(`${BASEURL}/login`,{
+    var response = await fetch(`${BASEURL}/app/user/login`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export const handleSubmit = async (event, email, password, setErrorState) => {
     var json = await response.json();
     console.log("json",json)
     if(response.status === 200){
-      window.location.href = '/MainPage/Dashboard';
+      window.location.href = '/dashboard';
     } else {
       //setErrorState(true);
     }
