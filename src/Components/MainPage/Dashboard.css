@@ -1,0 +1,133 @@
+/* Sidebar styling */
+
+.sidebar {
+    width: 250px;
+    background-color: #36b3a8;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  .sidebar-title {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar-item {
+    margin: 15px 0;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .sidebar-item.active {
+    font-weight: bold;
+    color: #A5B4FC;
+  }
+  
+  /* Main Content Styling */
+ .main-content {
+    padding: 30px;
+    margin-left: 250px;
+    background-color: #f0f0f0;
+    color: #333;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  
+  .dashboard-overview {
+    margin-bottom: 40px;
+  }
+  
+  .dashboard-overview h3 {
+    font-size: 24px;
+  }
+  
+  .dashboard-overview p {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  .stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .stat-item {
+    background-color: #F8F9FA;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    flex: 1;
+    margin: 0 10px;
+  }
+  
+  .stat-item p {
+    font-size: 14px;
+  }
+  
+  .stat-item h2 {
+    font-size: 32px;
+    margin: 0;
+  }
+  
+  .hiring-pipeline, .recent-applications {
+    margin-top: 40px;
+  }
+  
+  h4 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #F4F5F7;
+    font-size: 16px;
+  }
+  
+  td {
+    font-size: 14px;
+  }
+  
+  /* Status Badge Styling */
+  .status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+  }
+  
+  .shortlisted {
+    background-color: #3b82f6;
+  }
+  
+  .interview {
+    background-color: #8b5cf6;
+  }
+  
+  .on-hold {
+    background-color: #f59e0b;
+  }
+  

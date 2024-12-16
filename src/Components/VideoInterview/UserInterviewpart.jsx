@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import { RiVideoOnLine,RiVideoOffLine } from "react-icons/ri";
+import { FaMicrophone,FaMicrophoneSlash } from "react-icons/fa";
 
 const CandidateView = ({ setCandidateResponse }) => {
   const [isRecording, setIsRecording] = useState(false);
@@ -54,46 +56,43 @@ const CandidateView = ({ setCandidateResponse }) => {
   };
 
   return (
-    <div className="flex flex-col h-screen w-full">
+    <div className="flex flex-col w-full h-screen">
       {/* Video Section */}
       <div className="flex flex-col items-center p-4">
         <video
           ref={videoRef}
           autoPlay
-          className="w-full h-3/4 border border-gray-300 rounded"
+          className="w-full border border-gray-300 rounded h-3/4"
         />
         {isRecording ? (
           <button
             onClick={stopVideo}
-            className="mt-4 bg-red-500 text-white p-2 rounded"
-          >
-            Stop Video
+            className="p-2 mt-4 text-white bg-red-500 rounded">
+            <RiVideoOnLine/>
           </button>
         ) : (
           <button
             onClick={startVideo}
-            className="mt-4 bg-blue-500 text-white p-2 rounded"
-          >
-            Start Video
+            className="p-2 mt-4 text-white bg-blue-500 rounded">
+            <RiVideoOffLine />
           </button>
         )}
       </div>
 
       {/* Transcription Control */}
-      <div className="flex gap-4 mb-4 justify-center">
+      <div className="flex justify-center gap-4 mb-4">
         <button
-          className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+          className="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-600"
           onClick={startTranscription}
-          disabled={isTranscribing}
-        >
-          Start Transcription
+          disabled={isTranscribing}>
+          <FaMicrophoneSlash/>
         </button>
         <button
-          className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+          className="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-600"
           onClick={stopTranscription}
           disabled={!isTranscribing}
         >
-          Stop Transcription
+          <FaMicrophone/>
         </button>
       </div>
 
@@ -108,14 +107,12 @@ const CandidateView = ({ setCandidateResponse }) => {
         <div className="flex flex-row justify-between">
           <button
             onClick={resetTranscript}
-            className="mt-2 w-1/5 bg-yellow-500 text-white p-2 rounded"
-          >
+            className="w-1/5 p-2 mt-2 text-white bg-yellow-500 rounded">
             Reset Transcript
           </button>
           <button
             onClick={(e) => handleText(e)}
-            className="mt-2 w-1/5 bg-blue-500 text-white p-2 rounded"
-          >
+            className="w-1/5 p-2 mt-2 text-white bg-blue-500 rounded">
             Send
           </button>
         </div>
