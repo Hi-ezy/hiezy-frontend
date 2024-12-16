@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/hiezy-frontend/static/css/main.445c2b38.css",
+    "main.js": "/hiezy-frontend/static/js/main.d49b7229.js",
+    "static/js/453.947a1a8e.chunk.js": "/hiezy-frontend/static/js/453.947a1a8e.chunk.js",
+    "index.html": "/hiezy-frontend/index.html",
+    "main.445c2b38.css.map": "/hiezy-frontend/static/css/main.445c2b38.css.map",
+    "main.d49b7229.js.map": "/hiezy-frontend/static/js/main.d49b7229.js.map",
+    "453.947a1a8e.chunk.js.map": "/hiezy-frontend/static/js/453.947a1a8e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.445c2b38.css",
+    "static/js/main.d49b7229.js"
+  ]
+}
