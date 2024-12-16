@@ -27,6 +27,8 @@ export const ResumeSubmit = () => {
         <h2>ResumeSubmit</h2>
         <div className="resume-upload-section">
         <h2>Submit Your Resume</h2>
+        <div><h3>Name</h3><input type="text" placeholder="Enter your name" required /></div>
+        <div><h3>Email</h3><input type="email" placeholder="Enter your email" required /></div>
         <input type="file" onChange={handleResumeUpload} className="upload-input" />
         <div className="resume-list">
           <h4>Uploaded Resumes:</h4>

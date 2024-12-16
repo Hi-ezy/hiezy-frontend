@@ -1,5 +1,6 @@
 import {React, useState} from 'react'
 import './LoginPage.css'; // Link to the CSS file
+import { handleSubmit } from './loginPage';
 
 /*import {React, useState} from 'react'
 import './LoginPage.css'
@@ -77,26 +78,20 @@ export const LoginPage = () => {
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword);
-      };
-    
+      };*/
+      const [errorState, setErrorState] = useState(false);
       const handleFormSubmit = (event) => {
 
         event.preventDefault();
         // //validatoion
-        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-       console.log('username :'+username,'password :'+password);
+       console.log('email :'+email,'password :'+password);
        
         //call api wrapper.
-        if (username === 'admin@email.com' && password === 'pass123') {
-          console.log('Login successful!');
-           window.location.href = '/MainPage';
-         } else {
-           console.log('Invalid username or password');
-          setErrorState(true);
-         }
-         
-        }*/
+        handleSubmit(event, email, password, setErrorState);
+        setErrorState(true);
+      };
 
   return (
     <div className="login-container">
@@ -108,13 +103,16 @@ export const LoginPage = () => {
           <li>AI-Powered Interviews</li>
         </ul>
 
-        <p>New to Hiezy? <span className="signup-link">Sign up</span></p>
+        <p>New to Hiezy? <span className="signup-link" onClick={() => window.location.href = '/signup'}>Sign up</span></p>
 
         <form>
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="password" required />
-          <button type="submit" className="continue-btn" 
-          onClick={() => { window.location.href = "/MainPage"; }}>Continue</button>
+          <input id ='email' type="email" placeholder="Email" required />
+          <input id='password' type="password" placeholder="password" required />
+          <button type='submit' className="continue-btn" 
+          onClick={handleFormSubmit}>Continue</button>
+        
+          {/*set error message*/}
+          {errorState && <p className="error">Invalid username or password</p>}
         </form>
 
         <a href="/login" className="forgot-password">Forget password?</a>

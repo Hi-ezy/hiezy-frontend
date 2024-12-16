@@ -18,7 +18,7 @@ export default async function TriggerSignup(email, name, password) {
 
     //hanlde response
     if (response.status === 201) {
-        window.location.href = '/hr';
+        window.location.href = '/MainPage/Dashboard';
       } else if( response.status === 409) {
           window.location.href = '/login';
         }  else {
@@ -28,7 +28,7 @@ export default async function TriggerSignup(email, name, password) {
     }
     catch(err){
         console.log(err);
-        window.location.href = '/MainPage';
+        window.location.href = '/signup';
     }
 
 

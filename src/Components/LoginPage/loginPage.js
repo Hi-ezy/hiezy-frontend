@@ -2,7 +2,7 @@
 const BASEURL = process.env.REACT_APP_BASE_URL;
 
 
-export const handleSubmit = async (event, username, password, setErrorState) => {
+export const handleSubmit = async (event, email, password, setErrorState) => {
     event.preventDefault();
 
     // Perform login logic here
@@ -11,14 +11,14 @@ export const handleSubmit = async (event, username, password, setErrorState) => 
     // Otherwise, you can display an error message
 
     //api logic
-    console.log('username1 :'+username,'password1 :'+password);
+    console.log('email :'+email,'password1 :'+password);
     var response = await fetch(`${BASEURL}/login`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: username,
+        email: email,
         password: password,
       }),
     });
@@ -26,7 +26,7 @@ export const handleSubmit = async (event, username, password, setErrorState) => 
     var json = await response.json();
     console.log("json",json)
     if(response.status === 200){
-      window.location.href = '/hr';
+      window.location.href = '/MainPage/Dashboard';
     } else {
       //setErrorState(true);
     }
