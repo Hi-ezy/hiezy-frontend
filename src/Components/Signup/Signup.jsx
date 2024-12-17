@@ -1,9 +1,11 @@
 import React from 'react'
-import TriggerSignup from './Signup.js';
 import '../LoginPage/LoginPage.css'
-
+import useSignup from './signup';
 //handler for signup
-const handleSignup = async (event) => {
+
+const Signup = () => {
+  const {signupUser} = useSignup()
+  const handleSignup = async (event) => {
     event.preventDefault();
     //Get form values
     const email = document.getElementById('email').value;
@@ -11,11 +13,8 @@ const handleSignup = async (event) => {
     const password = document.getElementById('password').value;
 
     //call api wrapper.
-    await TriggerSignup(email, name, password);
+    await signupUser(email, name, password);
 }
-
-
-const Signup = () => {
   return (
     <>
     {/* Signup Form */}
