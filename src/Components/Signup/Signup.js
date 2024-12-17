@@ -18,7 +18,7 @@ export default async function TriggerSignup(email, name, password) {
 
     //hanlde response
     if (response.status === 201) {
-        navigate('employer/dashboard');
+        navigate('/employer/dashboard');
       } else if( response.status === 409) {
           navigate('/login');
         }  else {

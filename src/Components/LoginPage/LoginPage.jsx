@@ -1,6 +1,6 @@
 import {React, useState} from 'react'
 import './LoginPage.css'; // Link to the CSS file
-import { handleSubmit } from './loginPage';
+import { useHandleSubmit } from './loginPage';
 
 /*import {React, useState} from 'react'
 import './LoginPage.css'
@@ -79,6 +79,7 @@ export const LoginPage = () => {
     const handleShowPassword = () => {
         setShowPassword(!showPassword);
       };*/
+      const {login}= useHandleSubmit()
       const [errorState, setErrorState] = useState(false);
       const handleFormSubmit = (event) => {
 
@@ -89,7 +90,7 @@ export const LoginPage = () => {
        console.log('email :'+email,'password :'+password);
        
         //call api wrapper.
-        handleSubmit(event, email, password, setErrorState);
+        login(event, email, password, setErrorState);
         setErrorState(true);
       };
 
