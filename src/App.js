@@ -7,12 +7,15 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from './Components/LoginPage/LoginPage.jsx';
 import { JobDescCreationPage } from './Components/JobDescCreationPage/JobDescCreationPage.jsx';
 import Signup from './Components/Signup/Signup.jsx';
-import Dashboard from './Components/MainPage/Dashboard.jsx';
-import Jobs from './Components/MainPage/Jobs.jsx';
-import JobDetails from './Components/MainPage/JobDetails.jsx';
+// import Dashboard from './Components/MainPage/Dashboard.jsx';
+import Dashboard from './Components/EmployerComponnent/Dashboard/Dashboard.jsx';
+import Jobs from './Components/EmployerComponnent/Dashboard/EmployerJobPosting.jsx';
+// import Jobs from './Components/MainPage/Jobs.jsx';
+// import JobDetails from './Components/MainPage/JobDetails.jsx';
+import JobDetails from './Components/EmployerComponnent/Dashboard/ViewJobs.jsx';
 import CareerPage from './Components/CareerPage/CareerPage.jsx';
 import ResumeSubmit from './Components/CareerPage/ResumeSubmit.jsx';
-
+import EmployerDashboard from './Components/EmployerComponnent/Dashboard/EmployerDashboard.jsx';
 function App() {
   return (
     <div className="App">
@@ -25,9 +28,12 @@ function App() {
         <Route path="/login" element={< LoginPage/>} />
         <Route path='/career-page' element={<CareerPage/>} />
         <Route path='/resume-submit/:indexid' element={<ResumeSubmit/>} />
-        <Route path='/dashboard' element={<Dashboard/>} />
+        <Route path='/employer' element={<EmployerDashboard/>}> 
+          <Route path='/employer/dashboard' element={<Dashboard/>} /> 
+          <Route path='/employer/jobs' element={<Jobs/>} /> 
+        <Route path="/employer/job-details/:indexId" element={<JobDetails/>} />
+        </Route>
         <Route path='/jobs' element={<Jobs/>} />
-        <Route path="/job-details/:indexId" element={<JobDetails/>} />
         <Route path='/signup' element={<Signup/>} />
         <Route path='/jdcreation' element={<JobDescCreationPage/>} />
       </Routes>

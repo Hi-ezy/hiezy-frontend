@@ -1,7 +1,7 @@
+import { useNavigate } from "react-router-dom";
 const BASEURL = process.env.REACT_APP_BASE_URL;
-
 export default async function TriggerSignup(email, name, password) {
-
+  const navigate = useNavigate()
     console.log(email, name, password);
     try{
     const response = await fetch(`${BASEURL}/app/user/signup`, {
@@ -18,9 +18,9 @@ export default async function TriggerSignup(email, name, password) {
 
     //hanlde response
     if (response.status === 201) {
-        window.location.href = '/dashboard';
+        navigate('employer/dashboard');
       } else if( response.status === 409) {
-          window.location.href = '/login';
+          navigate('/login');
         }  else {
         console.log('Signup failed');
       }
@@ -28,7 +28,7 @@ export default async function TriggerSignup(email, name, password) {
     }
     catch(err){
         console.log(err);
-        window.location.href = '/signup';
+        navigate('/signup');
     }
 
 
