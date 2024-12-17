@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../Components/Navbar.tsx';
-import Hero from '../Components/Hero.tsx';
-import HowItWorks from '../Components/sections/HowItWorks.tsx';
-import AIFeatures from '../Components/sections/AIFeatures.tsx';
-import DemoSection from '../Components/sections/DemoSection.tsx';
-import Testimonials from '../Components/Testimonials.tsx';
+import Navbar from '../Components/Navbar.jsx';
+import Hero from '../Components/Hero.jsx';
+import HowItWorks from '../Components/sections/HowItWorks.jsx';
+import AIFeatures from '../Components/sections/AIFeatures.jsx';
+import DemoSection from '../Components/sections/DemoSection.jsx';
+import Testimonials from '../Components/Testimonials.jsx';
 
 
 const HomePage = () => {

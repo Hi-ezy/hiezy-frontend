@@ -1,6 +1,5 @@
 import React from 'react';
 import { Brain, Menu } from 'lucide-react';
-import HizeyLogo from "/assets/HiezyLogo.svg"
 export default function Navbar() {
   return (
     <nav className="fixed z-50 w-full shadow-sm bg-white/90 backdrop-blur-sm">
