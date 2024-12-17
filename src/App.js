@@ -41,9 +41,5 @@ function App() {
     </div>
   );
 }
-const WelcomeComponent =()=>{
-  return (
-    <h1>Welcome to HiEzy</h1>
-  )
-}
+
 export default App;
