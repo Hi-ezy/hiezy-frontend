@@ -5,7 +5,7 @@ import CandidateUploader from './Components/CandidateShortlisting/CandidateShort
 import HomePage from './Components/HomePage';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from './Components/LoginPage/LoginPage.jsx';
-import { JobDescCreationPage } from './Components/JobDescCreationPage/JobDescCreationPage.jsx';
+import JobDescCreator from './Components/JobDescCreationPage/JobDescCreation.jsx';
 import Signup from './Components/Signup/Signup.jsx';
 // import Dashboard from './Components/MainPage/Dashboard.jsx';
 import Dashboard from './Components/EmployerComponnent/Dashboard/Dashboard.jsx';
@@ -31,11 +31,11 @@ function App() {
         <Route path='/employer' element={<EmployerDashboard/>}> 
           <Route path='/employer/dashboard' element={<Dashboard/>} /> 
           <Route path='/employer/jobs' element={<Jobs/>} /> 
-        <Route path="/employer/job-details/:indexId" element={<JobDetails/>} />
+          <Route path="/employer/job-details/:indexId" element={<JobDetails/>} />
+          <Route path='/employer/jdcreation' element={<JobDescCreator/>} />
         </Route>
         <Route path='/jobs' element={<Jobs/>} />
         <Route path='/signup' element={<Signup/>} />
-        <Route path='/jdcreation' element={<JobDescCreationPage/>} />
       </Routes>
     </Router>
     </div>

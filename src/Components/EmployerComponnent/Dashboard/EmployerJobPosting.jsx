@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import findJobsbyCompany from './EmployerDashboard';
-
+import useGetallJobs from '../employer-data-fetch/job-fetch';
 const Jobs = () => {
-
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([Array]);
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch('http://localhost:8000/app/jobs/getalljobs'); // Replace with your API endpoint
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/app/jobs/getalljobs`); // Replace with your API endpoint
         if (!response.ok) {
           throw new Error('Failed to fetch jobs');
         }
@@ -26,7 +25,7 @@ const Jobs = () => {
   }, []);
 
   const handleCreateJob = () => {
-    navigate('/jdcreation');
+    navigate('/employer/jdcreation');
   };
 
   return (
