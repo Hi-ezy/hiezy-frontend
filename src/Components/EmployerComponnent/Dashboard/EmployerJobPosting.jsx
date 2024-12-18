@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import findJobsbyCompany from './EmployerDashboard';
 
 const Jobs = () => {
+
   const navigate = useNavigate();
-  const jobs = [
-    { jobid: 1001, title: 'Senior Frontend Developer', department: 'Engineering', location: 'Remote', resumes: 45, interviews: 12, status: 'Full-time' },
-    { jobid: 1002, title: 'Product Manager', department: 'Product', location: 'New York, NY', resumes: 38, interviews: 8, status: 'Full-time' },
-    { jobid: 1003, title: 'UX Designer', department: 'Design', location: 'San Francisco, CA', resumes: 32, interviews: 10, status: 'Full-time' },
-    { jobid: 1004, title: 'Backend Engineer', department: 'Engineering', location: 'Remote', resumes: 41, interviews: 15, status: 'Full-time' },
-  ];
+  const [jobs, setJobs] = useState([Array]);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/app/jobs/getalljobs'); // Replace with your API endpoint
+        if (!response.ok) {
+          throw new Error('Failed to fetch jobs');
+        }
+        const data = await response.json();
+        console.log('Jobs fetched:', data);
+        setJobs(data.response)
+        console.log('Jobs:', jobs);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchJobs();
+  }, []);
 
   const handleCreateJob = () => {
     navigate('/jdcreation');
@@ -16,11 +31,10 @@ const Jobs = () => {
 
   return (
     <div className="flex w-full mt-16">
-    
       <div className="ml-[250px] p-8 w-full bg-[#f0f0f0] min-h-screen">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex items-center justify-between mb-6">
           <div>
-            <h3 className="text-2xl mb-1">Open Positions</h3>
+            <h3 className="mb-1 text-2xl">Open Positions</h3>
             <p className="text-[#6B7280]">Manage and track all your job postings</p>
           </div>
           <button
@@ -30,16 +44,20 @@ const Jobs = () => {
             Create New Job
           </button>
         </div>
-
+        
         <div className="grid grid-cols-2 gap-6">
           {jobs.map((job) => (
-            <div key={job.jobid} className="bg-white p-6 rounded-lg shadow">
+            <div key={job.jobid} className="p-6 bg-white rounded-lg shadow">
               <div className="flex justify-between mb-4">
                 <div>
-                  <h4 className="text-lg font-semibold">{job.title}</h4>
-                  <p className="text-sm text-[#6B7280]">{job.department} • {job.location}</p>
+                  <h4 className="text-lg font-semibold">{job.jobTitle}</h4>
+                  <p className="text-sm text-[#6B7280]">
+                      {job.location}
+                  </p>
                 </div>
-                <span className="bg-[#D1FAE5] text-[#10B981] px-3 py-1 rounded-full text-xs">{job.status}</span>
+                <span className="bg-[#D1FAE5] text-[#10B981] px-3 py-1 rounded-full text-xs">
+                  open
+                </span>
               </div>
               <div className="flex justify-between mb-4">
                 <div className="text-center">
@@ -58,7 +76,7 @@ const Jobs = () => {
                 >
                   View Job
                 </button>
-                <button className="bg-gray-200 text-gray-600 px-4 py-2 rounded hover:bg-gray-300">
+                <button className="px-4 py-2 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">
                   Unpublish
                 </button>
               </div>
