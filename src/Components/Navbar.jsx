@@ -8,8 +8,8 @@ export default function Navbar() {
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center justify-start mtwindow.location.href = -4 ">
-           <img className='h-16 ' src='/assets/HiezyLogo1.png' alt='Hiezy' />
-           <h2 className='text-2xl mx-2 text-[#30d5c7] font-extrabold'>Hi-Ezy</h2>
+           <img className='h-12' src='/assets/HiezyLogo1.png' alt='Hiezy' />
+           <h2 className='text-2xl mx-2 pt-4 text-[#30d5c7] font-extrabold'>Hi-Ezy</h2>
           </div>
 
           <div className="items-center hidden space-x-8 md:flex">
