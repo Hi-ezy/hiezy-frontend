@@ -1,6 +1,8 @@
 import React from 'react';
 import { Brain, Menu } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 export default function Navbar() {
+  const navigate = useNavigate()
   return (
     <nav className="fixed z-50 w-full shadow-sm bg-white/90 backdrop-blur-sm">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -14,10 +16,10 @@ export default function Navbar() {
             <a href="#features" className="text-gray-600 hover:text-indigo-600">Features</a>
             <a href="#how-it-works" className="text-gray-600 hover:text-indigo-600">How it Works</a>
             <a href="#testimonials" className="text-gray-600 hover:text-indigo-600">Testimonials</a>
-            <button className="px-4 py-2 text-white bg-[#30d5c7] rounded-md hover:bg-indigo-700" onClick={() => { window.location.href = "./login"; }}>
+            <button className="px-4 py-2 text-white bg-[#30d5c7] rounded-md hover:bg-indigo-700" onClick={() => { navigate("/login"); }}>
               Employer Login 
             </button>
-            <button className="px-4 py-2 text-white bg-[#30d5c7] rounded-md hover:bg-indigo-700" onClick={() => { window.location.href = "./career-page"; }}>
+            <button className="px-4 py-2 text-white bg-[#30d5c7] rounded-md hover:bg-indigo-700" onClick={() => { navigate("/career-page"); }}>
               Career Page
             </button>
           </div>
