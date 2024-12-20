@@ -30,15 +30,15 @@ const jobId = localStorage.getItem("jobId")
         }
 
         // Stop video when response finishes
-        const utterance = new SpeechSynthesisUtterance(data.response);
-        utterance.onend = () => {
-          if (videoRef.current) {
-            videoRef.current.pause();
-            videoRef.current.currentTime = 0; // Reset video to the start
-          }
-        };
+        // const utterance = new SpeechSynthesisUtterance(data.response);
+        // utterance.onend = () => {
+        //   if (videoRef.current) {
+        //     videoRef.current.pause();
+        //     videoRef.current.currentTime = 0; // Reset video to the start
+        //   }
+        // };
 
-        window.speechSynthesis.speak(utterance);
+        // window.speechSynthesis.speak(utterance);
       }
     };
 
