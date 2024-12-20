@@ -15,7 +15,7 @@ export const ResumeSubmit = () => {
   const [candidateName, setCandidateName] = useState('');
   const [candidateEmail, setCandidateEmail] = useState('');
   const [jobs, setJobs] = useState([]);
-  const [singleJob, setSingleJob] = useState(null);
+  const [loading, setLoading] = useState(false); // Loading state
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,6 +57,7 @@ export const ResumeSubmit = () => {
 
   const handleShareResume = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading
     const formData = new FormData();
     formData.append('resume', resume);
     formData.append('jobId', indexid);
@@ -68,9 +69,27 @@ export const ResumeSubmit = () => {
       name: candidateName,
       email: candidateEmail,
     });
-    const handleUserResume = await handleResume(formData);
-    console.log(handleUserResume);
+
+    try {
+      const handleUserResume = await handleResume(formData);
+      console.log(handleUserResume);
+    } catch (error) {
+      console.error('Error uploading resume:', error);
+    } finally {
+      setLoading(false); // Stop loading
+    }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className=" w-52 flex flex-col items-center">
+          <div className="w-16 h-16 border-4 border-blue-500 border-dotted rounded-full animate-spin"></div>
+          <p className="mt-4 text-lg text-gray-700">Uploading your resume, please wait...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md font-sans">
