@@ -9,11 +9,13 @@ const AIGirl = ({ candidateResponse }) => {
   const [aiResponse, setAiResponse] = useState("");
   const videoRef = useRef(null);
 const sessionId = localStorage.getItem("sessionId")
+const jobId = localStorage.getItem("jobId")
   useEffect(() => {
     const fetchAIResponse = async () => {
       const p_body = {
         question: candidateResponse,
         sessionID: sessionId,
+        jobId: jobId,
         phase: 'interaction',
       };
 
