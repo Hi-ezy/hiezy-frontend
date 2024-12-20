@@ -1,137 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import './ResumeSubmit.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import useHandleResume from './resume';
+
 const BASEURL = process.env.REACT_APP_BASE_URL;
-/*
-export const ResumeSubmit = () => {
-   
-  
-    const { indexid } = useParams();
-    console.log('index_id:', indexid);
-    //use the index_id coming in the page as param and save as Jobid
-
-   // State for the uploaded resumes
-   const [resumes, setResumes] = useState([]);
-   const [jobs, setJobs] = useState([]);
-  const [singleJob, setSingleJob] = useState(null);
-
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/app/jobs/getalljobs`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch jobs');
-        }
-        const data = await response.json();
-        console.log('Jobs fetched:', data.response);
-        setJobs(data.response);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchJobs();
-  }, []); // Only run once on component mount
-
-  useEffect(() => {
-    if (jobs.length > 0) {
-      console.log('Looking for job with id:', indexid);
-      console.log('Jobs:', jobs);
-      const index = '6761db740cf6c066b602d09b';
-      const foundJob = jobs.find((job) => job._id === index); //hardcoding it
-      if (foundJob) {
-        console.log('Single job found:', foundJob);
-        setSingleJob(foundJob);
-      } else {
-        console.error('No job found with the given id:', indexid);
-      }
-    }
-  }, [jobs, indexid]);
-   
-   // Function to handle resume upload
-   const handleResumeUpload = (event) => {
-     const newResume = event.target.files[0];
-     if (newResume) {
-       setResumes([...resumes, { name: newResume.name, date: new Date().toLocaleDateString() }]);
-     }
-   };
- 
-   // Fetch resumes - Placeholder for fetching data from an API
-
-
-   
-
-  
-
-  return (
-    <div className="career-page-container">
-      <div className="job-listing-section">
-      {singleJob ? (
-            <div key={singleJob._id}>
-                <h2>Company : {singleJob.company}</h2>
-                <h3>Job Title : {singleJob.jobTitle}</h3>
-                <p>Job Location : {singleJob.location}</p>
-                <p>Experience Required : {singleJob.experience}</p>
-                <p>Skills Required : {singleJob.skills}</p>
-                <p>Job Description : {singleJob.jobDescription}</p>
-            </div>
-        ) : (
-            <p>Job not found.</p>
-        )}
-        {singleJob ? (
-            <div key={singleJob._id} className="resume-upload-section">
-        <h2>ResumeSubmit</h2>
-        <h2>Submit Your Resume</h2>
-        <div><h3>Name</h3><input type="text" placeholder="Enter your name" required /></div>
-        <div><h3>Email</h3><input type="email" placeholder="Enter your email" required /></div>
-        <input type="file" onChange={handleResumeUpload} className="upload-input" />
-        <div className="resume-list">
-          <h4>Uploaded Resumes:</h4>
-          {resumes.length > 0 ? (
-            <ul>
-              {resumes.map((resume, index) => (
-                <li key={index}>
-                  {resume.name} - <span>{resume.date}</span>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No resumes uploaded yet.</p>
-          )}
-        </div>
-      </div>
-      ) : ( 
-        <p>Please select a job.</p>)}
-      </div>
-    </div>
-
-
-  )
-};
-
-export default ResumeSubmit
-*/
 
 export const ResumeSubmit = () => {
-   const {handleResume} =useHandleResume()
-  
+  const { handleResume } = useHandleResume();
   const { indexid } = useParams();
   console.log('index_id:', indexid);
 
   const [resume, setResume] = useState(null);
   const [keywords, setKeywords] = useState([]);
   const [keywordInput, setKeywordInput] = useState('');
-  const [candidateName, setCandidateName]= useState("")
-  const [candidateEmail, setCandidateEmail]= useState("")
+  const [candidateName, setCandidateName] = useState('');
+  const [candidateEmail, setCandidateEmail] = useState('');
   const [jobs, setJobs] = useState([]);
   const [singleJob, setSingleJob] = useState(null);
   const navigate = useNavigate();
 
-
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/app/jobs/getJobbyid?id=${indexid}`);
+        const response = await fetch(
+          `${process.env.REACT_APP_BASE_URL}/app/jobs/getJobbyid?id=${indexid}`
+        );
         if (!response.ok) {
           throw new Error('Failed to fetch jobs');
         }
@@ -162,70 +54,92 @@ export const ResumeSubmit = () => {
   const handleKeywordInputChange = (event) => {
     setKeywordInput(event.target.value);
   };
-  const handleShareResume = async(e) => {
+
+  const handleShareResume = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("resume", resume);
-    formData.append("jobId", indexid);
-    formData.append("name", candidateName);
-    formData.append("email", candidateEmail);
+    formData.append('resume', resume);
+    formData.append('jobId', indexid);
+    formData.append('name', candidateName);
+    formData.append('email', candidateEmail);
 
-    // Debugging candidate details
-    console.log("Candidate Details being sent to the backend:", {
+    console.log('Candidate Details being sent to the backend:', {
       jobId: indexid,
       name: candidateName,
       email: candidateEmail,
     });
     const handleUserResume = await handleResume(formData);
-    console.log(handleUserResume)
+    console.log(handleUserResume);
   };
 
   return (
-    <div className="resume-upload-container">
-     {jobs.map((job) => (
-            <div key={job._id}>
-                <h2>Company : {job.company}</h2>
-                <h3>Job Title : {job.jobTitle}</h3>
-                <p>Job Location : {job.location}</p>
-                <p>Experience Required : {job.experience}</p>
-                <p>Skills Required : {job.skills}</p>
-                <p>Job Description : {job.jobDescription}</p>
-            </div>
-        ) )}
-      <div className="name-section">Name<input type="text" placeholder="Enter your name" required onChange={(e)=> setCandidateName(e.target.value)} /> </div>
-      <div className="name-section">Email Id <input type="email" placeholder="Enter your email" required onChange={(e)=> setCandidateEmail(e.target.value)} /></div>
-      <h2>Upload your resume</h2>
-      <div className="upload-section">ß
-          <input type="file" id="file-input" onChange={handleFileUpload} hidden />
-        <label htmlFor="file-input" className="upload-box">
-          <span className="upload-icon">📤</span>
-          <p>Drag your resume here or click to upload</p>
-          <small>Acceptable file types: PDF, DOCX (5MB max)</small>
+    <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md font-sans">
+      {jobs.map((job) => (
+        <div key={job._id} className="space-y-4 mb-6">
+          <h2 className="text-2xl font-semibold text-gray-800">Company: {job.company}</h2>
+          <h3 className="text-xl text-gray-700">Job Title: {job.jobTitle}</h3>
+          <p className="text-gray-600">Job Location: {job.location}</p>
+          <p className="text-gray-600">Experience Required: {job.experience}</p>
+          <p className="text-gray-600">Skills Required: {job.skills}</p>
+          <p className="text-gray-600">Job Description: {job.jobDescription}</p>
+        </div>
+      ))}
+
+      <div className="mb-4">
+        <label className="block text-gray-700 font-medium mb-1">Name</label>
+        <input
+          type="text"
+          placeholder="Enter your name"
+          className="w-full p-3 border border-gray-300 rounded-lg"
+          required
+          onChange={(e) => setCandidateName(e.target.value)}
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-gray-700 font-medium mb-1">Email</label>
+        <input
+          type="email"
+          placeholder="Enter your email"
+          className="w-full p-3 border border-gray-300 rounded-lg"
+          required
+          onChange={(e) => setCandidateEmail(e.target.value)}
+        />
+      </div>
+
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">Upload your resume</h2>
+      <div className="text-center mb-6">
+        <input
+          type="file"
+          id="file-input"
+          onChange={handleFileUpload}
+          hidden
+        />
+        <label
+          htmlFor="file-input"
+          className="inline-block w-full p-6 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer text-center hover:border-blue-500 transition-colors"
+        >
+          <span className="text-4xl mb-4">📤</span>
+          <p className="font-bold">Drag your resume here or click to upload</p>
+          <small className="block text-gray-500 mt-2">Acceptable file types: PDF, DOCX (5MB max)</small>
         </label>
       </div>
 
-      {resume && <p className="uploaded-file-name">Uploaded: {resume.name}</p>}
+      {resume && <p className="text-gray-700 mt-2">Uploaded: {resume.name}</p>}
 
-      {/*<div className="keywords-section">
-        <h3>Add Keywords to Highlight Your Skills</h3>
-        <input
-          type="text"
-          placeholder="Type your tags here..."
-          value={keywordInput}
-          onChange={handleKeywordInputChange}
-        />
-        <button onClick={handleAddKeyword} className="add-keyword-btn">+ Add</button>
-
-        <div className="keywords-list">
-          {keywords.map((keyword, index) => (
-            <span key={index} className="keyword-badge">+ {keyword}</span>
-          ))}
-        </div>
-      </div>*/}
-
-      <div className="action-buttons">
-        <button onClick={() => navigate(-1)} className="save-btn">Back Button</button>
-        <button className="share-btn" onClick={(e)=>handleShareResume(e)}>Share Now</button>
+      <div className="flex justify-between mt-6">
+        <button
+          onClick={() => navigate(-1)}
+          className="px-6 py-3 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition-colors"
+        >
+          Back
+        </button>
+        <button
+          onClick={handleShareResume}
+          className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+        >
+          Share Now
+        </button>
       </div>
     </div>
   );
