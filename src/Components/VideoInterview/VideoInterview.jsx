@@ -11,18 +11,13 @@ const VideoInterview = () => {
     return (
         <div className="flex flex-col h-screen">
             <div className="flex flex-row">
-            <div className="w-1/2">
-                    
-                <CandidateView candidateResponse={candidateResponse} setCandidateResponse={setCandidateResponse}/>
-                </div>
                 <div className="w-1/2">
                     <AIGirl candidateResponse={candidateResponse} />
-                    
+                </div>
+                <div className="w-1/2">
+                    <CandidateView candidateResponse={candidateResponse} setCandidateResponse={setCandidateResponse}/>
                 </div>
             </div>
-
-          
-       
         </div>
     );
 };

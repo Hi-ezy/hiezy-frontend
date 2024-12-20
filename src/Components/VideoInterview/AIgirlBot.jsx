@@ -65,20 +65,28 @@ const sessionId = localStorage.getItem("sessionId")
   
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <video
-        ref={videoRef}
-        className="w-64 h-64"
-        autoPlay
-        muted
-        src="/assets/video_interview_model.mp4"
-      />
-      <textarea
-        className="w-full h-32 p-2 border rounded"
-        value={aiResponse}
-        readOnly
-        placeholder="AI response will be here"
-      />
+    <div className="h-screen bg-gray-100">
+      <div className="h-full mx-auto">
+        <div className="flex flex-col h-full gap-4 p-4">
+          <div className="h-3/4">
+            <video
+              ref={videoRef}
+              className="object-cover w-full h-full rounded-lg shadow-xl"
+              autoPlay
+              muted
+              src="/assets/video_interview_model.mp4"
+            />
+          </div>
+          <div className="h-1/4">
+            <textarea
+              className="w-full h-full p-4 text-lg border-2 rounded-lg shadow-lg resize-none"
+              value={aiResponse}
+              readOnly
+              placeholder="AI response will be here..."
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
