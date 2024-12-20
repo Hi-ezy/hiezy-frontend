@@ -15,8 +15,10 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const JobDetails = () => {
   const { indexid } = useParams();
+  console.log('index_id:', indexid);
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
+  /*const [candidateData, setCandidateData] = useState([Array]);*/
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -34,6 +36,23 @@ const JobDetails = () => {
     };
     fetchJobs();
   }, []);
+
+  /* useEffect(() => {
+    const fetchCandidate = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/app/candidate/getallcandidate`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch candidate');
+        }
+        const data = await response.json();
+        console.log('Jobs fetched:', data.response);
+        setCandidateData(data.response);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchCandidate();
+  }, []);*/
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating / 20); // full stars (out of 5)
@@ -53,10 +72,6 @@ const JobDetails = () => {
     );
   };
 
-  const interviewer = {
-    name: "Saumya",
-    mail: "saumya@gmail.com",
-  };
 
   const resumeMatchData = [
     { criteria: "Below 40%", value: 30 },
@@ -72,7 +87,8 @@ const JobDetails = () => {
   ];
 
   const candidateSatisfaction = { value: 79 };
-
+  
+ /*will comment once the candidate data is fetched from the backend*/
   const candidateData = [
     {
       candidate: "John",
@@ -122,17 +138,11 @@ const JobDetails = () => {
             <div key={job._id}>
             <div className="flex-1">
 
-              <h4 className="text-lg font-medium">Job Description:</h4>
-              <p className="text-gray-700">{job.jobTittle}</p>
+              
+              <h4 className="text-lg font-large">{job.jobTitle}</h4>
             </div>
           </div>
         ))}
-
-          <div className="flex-1">
-            <h4 className="text-lg font-medium">Interviewer:</h4>
-            <p className="text-gray-700">{interviewer.name}</p>
-            <p className="text-gray-500">{interviewer.mail}</p>
-          </div>
         </div>
       </div>
 
