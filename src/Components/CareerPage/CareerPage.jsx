@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './CareerPage.css';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const CareerPage = () => {
 
   const [jobs, setJobs] = useState([Array]);
+
+
+  const navigate = useNavigate();
   
     useEffect(() => {
       const fetchJobs = async () => {
@@ -25,7 +29,7 @@ const CareerPage = () => {
 
   return (
     <div className="career-page-container">
-      <button onClick={() => window.history.back()} className="back-btn">Back</button>
+      <button onClick={() => navigate(-1)} className="back-btn">Back</button>
       <div className="job-listing-section">
         <h2>Current Job Openings</h2>
         <div className="job-listings">
@@ -37,7 +41,7 @@ const CareerPage = () => {
               <p>Experience Required : {job.experience}</p>
               <p>Skills Required : {job.skills}</p>
               <button onClick={() => {
-                 window.location.href = `/resume-submit/${job._id}`;}} className="apply-btn">Apply Now</button>
+                 navigate(`/resume-submit/${job._id}`);}} className="apply-btn">Apply Now</button>
             </div>
           ))}
         </div>

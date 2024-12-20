@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ResumeSubmit.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 /*
 export const ResumeSubmit = () => {
@@ -123,11 +123,13 @@ export const ResumeSubmit = () => {
 
   const [jobs, setJobs] = useState([]);
   const [singleJob, setSingleJob] = useState(null);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/app/jobs/getAllJobBYID?_id=${indexid}`);
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/app/jobs/getJobbyid?id=${indexid}`);
         if (!response.ok) {
           throw new Error('Failed to fetch jobs');
         }
@@ -203,7 +205,7 @@ export const ResumeSubmit = () => {
       </div>*/}
 
       <div className="action-buttons">
-        <button onClick={() => window.history.back()} className="save-btn">Back Button</button>
+        <button onClick={() => navigate(-1)} className="save-btn">Back Button</button>
         <button className="share-btn">Share Now</button>
       </div>
     </div>

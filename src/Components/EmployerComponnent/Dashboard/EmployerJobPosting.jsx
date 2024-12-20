@@ -46,7 +46,7 @@ const Jobs = () => {
         
         <div className="grid grid-cols-2 gap-6">
           {jobs.map((job) => (
-            <div key={job.jobid} className="p-6 bg-white rounded-lg shadow">
+            <div key={job._id} className="p-6 bg-white rounded-lg shadow">
               <div className="flex justify-between mb-4">
                 <div>
                   <h4 className="text-lg font-semibold">{job.jobTitle}</h4>
@@ -71,7 +71,7 @@ const Jobs = () => {
               <div className="flex justify-between">
                 <button
                   className="bg-[#6366F1] text-white px-4 py-2 rounded hover:bg-[#4F46E5]"
-                  onClick={() => navigate(`/employer/job-details/${job.jobid}`)}
+                  onClick={() => navigate(`/employer/job-details/${job._id}`)}
                 >
                   View Job
                 </button>
