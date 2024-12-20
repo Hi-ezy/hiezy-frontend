@@ -87,7 +87,7 @@ export default function JobDescCreator() {
         alert("An error occurred. Please try again.");
       } finally {
         setLoading(false);
-        // setCurrentStep((prevStep) => prevStep + 1);
+        setCurrentStep((prevStep) => prevStep + 1);
       }
     }
 
