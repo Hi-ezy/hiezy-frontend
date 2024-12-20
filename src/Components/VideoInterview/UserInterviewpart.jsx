@@ -112,13 +112,13 @@ const CandidateView = ({ setCandidateResponse }) => {
               <button
                 className={`p-4 text-white rounded-full ${
                   isTranscribing 
-                    ? 'bg-red-500 hover:bg-red-600' 
-                    : 'bg-green-500 hover:bg-green-600'
+                    ? 'bg-green-500 hover:bg-red-600' 
+                    : 'bg-red-500 hover:bg-green-600'
                 }`}
                 onClick={isTranscribing ? stopTranscription : startTranscription}>
                 {isTranscribing ? 
-                  <FaMicrophoneSlash className="w-8 h-8"/> : 
-                  <FaMicrophone className="w-8 h-8"/>}
+                <FaMicrophone className="w-8 h-8"/>:  <FaMicrophoneSlash className="w-8 h-8"/> 
+                  }
               </button>
             </div>
           </div>
