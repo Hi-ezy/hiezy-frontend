@@ -24,6 +24,7 @@ const useCandidateValidate = (uniqueId) => {
         const result = await response.json();
         console.log("result", result.data);
         setCandidateData(result.data)
+        localStorage.setItem("jobId", result?.data?.jobId)
           localStorage.setItem("sessionId", result?.data?.uniqueRandomCode)
         if (!didCancel) {
       
