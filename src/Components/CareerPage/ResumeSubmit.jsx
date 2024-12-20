@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './ResumeSubmit.css';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import useHandleResume from './resume';
+const BASEURL = process.env.REACT_APP_BASE_URL;
 /*
 export const ResumeSubmit = () => {
    
@@ -112,7 +113,7 @@ export default ResumeSubmit
 */
 
 export const ResumeSubmit = () => {
-   
+   const {handleResume} =useHandleResume()
   
   const { indexid } = useParams();
   console.log('index_id:', indexid);
@@ -120,7 +121,8 @@ export const ResumeSubmit = () => {
   const [resume, setResume] = useState(null);
   const [keywords, setKeywords] = useState([]);
   const [keywordInput, setKeywordInput] = useState('');
-
+  const [candidateName, setCandidateName]= useState("")
+  const [candidateEmail, setCandidateEmail]= useState("")
   const [jobs, setJobs] = useState([]);
   const [singleJob, setSingleJob] = useState(null);
   const navigate = useNavigate();
@@ -160,6 +162,23 @@ export const ResumeSubmit = () => {
   const handleKeywordInputChange = (event) => {
     setKeywordInput(event.target.value);
   };
+  const handleShareResume = async(e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("resume", resume);
+    formData.append("jobId", indexid);
+    formData.append("name", candidateName);
+    formData.append("email", candidateEmail);
+
+    // Debugging candidate details
+    console.log("Candidate Details being sent to the backend:", {
+      jobId: indexid,
+      name: candidateName,
+      email: candidateEmail,
+    });
+    const handleUserResume = await handleResume(formData);
+    console.log(handleUserResume)
+  };
 
   return (
     <div className="resume-upload-container">
@@ -173,8 +192,8 @@ export const ResumeSubmit = () => {
                 <p>Job Description : {job.jobDescription}</p>
             </div>
         ) )}
-      <div className="name-section">Name<input type="text" placeholder="Enter your name" required /> </div>
-      <div className="name-section">Email Id <input type="email" placeholder="Enter your email" required /></div>
+      <div className="name-section">Name<input type="text" placeholder="Enter your name" required onChange={(e)=> setCandidateName(e.target.value)} /> </div>
+      <div className="name-section">Email Id <input type="email" placeholder="Enter your email" required onChange={(e)=> setCandidateEmail(e.target.value)} /></div>
       <h2>Upload your resume</h2>
       <div className="upload-section">ß
           <input type="file" id="file-input" onChange={handleFileUpload} hidden />
@@ -206,7 +225,7 @@ export const ResumeSubmit = () => {
 
       <div className="action-buttons">
         <button onClick={() => navigate(-1)} className="save-btn">Back Button</button>
-        <button className="share-btn">Share Now</button>
+        <button className="share-btn" onClick={(e)=>handleShareResume(e)}>Share Now</button>
       </div>
     </div>
   );
