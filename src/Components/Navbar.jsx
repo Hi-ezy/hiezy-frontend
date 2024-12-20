@@ -9,19 +9,19 @@ export default function Navbar() {
            <img className='h-16 ' src='/assets/HiezyLogo1.png' alt='Hiezy' />
            <h2 className='text-2xl mx-2 text-[#30d5c7] font-extrabold'>Hi-Ezy</h2>
           </div>
-           
+
           <div className="items-center hidden space-x-8 md:flex">
             <a href="#features" className="text-gray-600 hover:text-indigo-600">Features</a>
             <a href="#how-it-works" className="text-gray-600 hover:text-indigo-600">How it Works</a>
             <a href="#testimonials" className="text-gray-600 hover:text-indigo-600">Testimonials</a>
             <button className="px-4 py-2 text-white bg-[#30d5c7] rounded-md hover:bg-indigo-700" onClick={() => { window.location.href = "./login"; }}>
-              Employer Login 
+              Employer Login
             </button>
             <button className="px-4 py-2 text-white bg-[#30d5c7] rounded-md hover:bg-indigo-700" onClick={() => { window.location.href = "./career-page"; }}>
               Career Page
             </button>
           </div>
-          
+
           <div className="md:hidden">
             <Menu className="w-6 h-6 text-gray-600" />
           </div>

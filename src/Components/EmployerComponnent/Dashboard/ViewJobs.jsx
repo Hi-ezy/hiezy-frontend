@@ -1,106 +1,201 @@
-import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import { Pie } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
+// Register required Chart.js components
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const JobDetails = () => {
   const { Jobid } = useParams();
   const navigate = useNavigate();
 
+  const renderStars = (rating) => {
+    const fullStars = Math.floor(rating / 20); // full stars (out of 5)
+    const halfStar = rating % 20 >= 10 ? 1 : 0; // half star if rating is >= 10
+    const emptyStars = 5 - fullStars - halfStar; // empty stars
+
+    return (
+      <div className="flex">
+        {[...Array(fullStars)].map((_, i) => (
+          <FaStar key={`full-${i}`} size={35} className="text-yellow-400" />
+        ))}
+        {halfStar === 1 && <FaStarHalfAlt size={35} className="text-yellow-400" />}
+        {[...Array(emptyStars)].map((_, i) => (
+          <FaRegStar key={`empty-${i}`} size={35} className="text-yellow-400" />
+        ))}
+      </div>
+    );
+  };
+
+  const interviewer = {
+    name: "Saumya",
+    mail: "saumya@gmail.com",
+  };
+
+  const job = {
+    name: "Product manager",
+  };
+
+  const resumeMatchData = [
+    { criteria: "Below 40%", value: 30 },
+    { criteria: "40-60%", value: 53 },
+    { criteria: "60-80%", value: 71 },
+    { criteria: "Above 80%", value: 89 },
+  ];
+
+  const timeTaken = [
+    { process: "Sourcing (Job creation, Job posting, Resume fetching)", value: "2" },
+    { process: "Pre-screening", value: "3" },
+    { process: "Candidate selection", value: "3" },
+  ];
+
+  const candidateSatisfaction = { value: 79 };
+
   const candidateData = [
     {
-      candidate: 'John Smith',
-      questionsAttempted: 25,
-      questionsAnswered: 23,
-      score: '88%',
-      relevance: '92%',
+      candidate: "John",
+      questionsAttempted: 5,
+      questionsAnswered: 4,
+      score: 75
+    },
+    {
+      candidate: "Vivek",
+      questionsAttempted: 5,
+      questionsAnswered: 2,
+      score: 30
     },
   ];
 
+  const resumePieData = {
+    labels: resumeMatchData.map((item) => item.criteria),
+    datasets: [
+      {
+        label: "Resume Match",
+        data: resumeMatchData.map((item) => item.value),
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50"],
+        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50"],
+      },
+    ],
+  };
+
+  // Data for Time Taken Pie Chart
+  const timePieData = {
+    labels: timeTaken.map((item) => item.process),
+    datasets: [
+      {
+        label: "Time Taken (in days)",
+        data: timeTaken.map((item) => item.value),
+        backgroundColor: ["#F44336", "#2196F3", "#FFC107"],
+        hoverBackgroundColor: ["#E53935", "#1E88E5", "#FFB300"],
+      },
+    ],
+  };
+
   return (
-  
-      <div className="flex-1 ">
-        {/* Topbar */}
-        
+    <div className="w-[80%] ml-64 my-20">
+      {/* Top Section */}
+      <div className="bg-white p-6 rounded-lg shadow mb-8">
+        <div className="flex flex-col md:flex-row gap-6">
 
-        {/* Back Button */}
-        {/* <button
-          className="absolute top-16 left-4 px-4 py-2 bg-white border border-gray-300 text-gray-800 rounded-full shadow hover:bg-gray-50 z-10"
-          onClick={() => navigate(-1)}
-        >
-          Back
-        </button> */}
-
-        <div className="p-8 mt-8 bg-gray-100">
-          {/* Header */}
-          <div className="mb-6">
-            <h3 className="text-3xl font-semibold">Senior Frontend Developer</h3>
-            <p className="text-gray-500">Engineering</p>
+          <div className="flex-1">
+            <h4 className="text-lg font-medium">Job Description:</h4>
+            <p className="text-gray-700">{job.name}</p>
           </div>
 
-          {/* Grid Layout */}
-          <div className="grid grid-cols-2 gap-6">
-            {/* Resume Relevance Card */}
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h4 className="text-xl font-medium mb-4">Resume Relevance Distribution</h4>
-              <div className="flex justify-center items-center h-40">
-                <div className="w-32 h-32 rounded-full bg-gradient-to-t from-blue-200 to-blue-500"></div>
-              </div>
-            </div>
+          <div className="flex-1">
+            <h4 className="text-lg font-medium">Interviewer:</h4>
+            <p className="text-gray-700">{interviewer.name}</p>
+            <p className="text-gray-500">{interviewer.mail}</p>
+          </div>
+        </div>
+      </div>
 
-            {/* Category Performance Card */}
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h4 className="text-xl font-medium mb-4">Category Performance</h4>
-              <div className="flex justify-center items-center h-40">
-                <div className="w-24 h-24 rounded-full bg-gray-800"></div>
-              </div>
-            </div>
 
-            {/* Average Time to Hire Card */}
-            <div className="bg-white p-6 rounded-lg shadow col-span-2 flex justify-center items-center">
-              <h4 className="text-xl font-medium mr-4">Average Time to Hire:</h4>
-              <div className="flex items-center">
-                <span className="text-5xl text-indigo-600 font-bold">75</span>
-                <span className="ml-2 text-gray-600 text-lg">days</span>
-              </div>
+      {/* Pie Charts Section */}
+      <div className="grid grid-cols-2 gap-6 mb-8">
+        {/* Resume Match Data */}
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h4 className="text-xl font-medium mb-4">Resume Match Data</h4>
+          <div className="flex justify-center items-center">
+            <div style={{ width: "350px", height: "350px" }}>
+              <Pie data={resumePieData} />
             </div>
+          </div>
+        </div>
 
-            {/* Candidate Performance Table */}
-            <div className="bg-white p-6 rounded-lg shadow col-span-2">
-              <h4 className="text-xl font-medium mb-4">Candidate Performance</h4>
-              <table className="w-full table-auto">
-                <thead>
-                  <tr className="text-left text-gray-600 bg-gray-50">
-                    <th className="p-3">Candidate</th>
-                    <th className="p-3">Questions Attempted</th>
-                    <th className="p-3">Questions Answered</th>
-                    <th className="p-3">Score</th>
-                    <th className="p-3">Relevance</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {candidateData.map((candidate, index) => (
-                    <tr key={index} className="border-b">
-                      <td className="p-3">{candidate.candidate}</td>
-                      <td className="p-3">{candidate.questionsAttempted}</td>
-                      <td className="p-3">{candidate.questionsAnswered}</td>
-                      <td className="p-3">
-                        <span className="bg-green-100 text-green-600 px-2 py-1 rounded">
-                          {candidate.score}
-                        </span>
-                      </td>
-                      <td className="p-3">
-                        <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded">
-                          {candidate.relevance}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+        {/* Time Taken Distribution */}
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h4 className="text-xl font-medium mb-4">Time Taken Distribution</h4>
+          <div className="flex justify-center items-center">
+            <div style={{ width: "350px", height: "350px" }}>
+              <Pie data={timePieData} />
             </div>
           </div>
         </div>
       </div>
+
+      {/* Candidate Satisfaction Section */}
+      <div className="bg-white p-6 rounded-lg shadow mb-8">
+        <h4 className="text-xl font-medium">Candidate Satisfaction</h4>
+        <div className="mt-4 flex items-center justify-center">
+            {renderStars(candidateSatisfaction.value)}
+          <span className="ml-4 text-teal-600 font-bold">{candidateSatisfaction.value}%</span>
+        </div>
+      </div>
+
+      {/* Candidate Table */}
+      <div className="bg-white p-6 rounded-lg shadow">
+        <h4 className="text-xl font-medium mb-4">Candidates</h4>
+        <table className="w-full table-auto border-collapse">
+          <thead>
+            <tr className="bg-gray-200 text-gray-600">
+              <th className="p-3 text-center font-semibold">Candidate</th>
+              <th className="p-3 text-center font-semibold">Questions Attempted</th>
+              <th className="p-3 text-center font-semibold">Questions Answered</th>
+              <th className="p-3 text-center font-semibold">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {candidateData.length > 0 ? (
+              candidateData.map((candidate, index) => (
+                <tr
+                  key={index}
+                  className="cursor-pointer hover:bg-gray-100 border-b"
+                  onClick={() => navigate(`/candidate/${candidate.id}`)}
+                >
+                  <td className="p-3">
+                    <div className="flex items-center justify-center h-full">{candidate.candidate}</div>
+                  </td>
+                  <td className="p-3">
+                    <div className="flex items-center justify-center h-full">{candidate.questionsAttempted}</div>
+                  </td>
+                  <td className="p-3">
+                    <div className="flex items-center justify-center h-full">{candidate.questionsAnswered}</div>
+                  </td>
+                  <td className="p-3">
+                    <div className="flex items-center justify-center h-full">{candidate.score}</div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td className="p-3 text-gray-500 text-center" colSpan={4}>
+                  No candidates available.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
   );
 };
 
