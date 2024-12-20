@@ -1,14 +1,25 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 const Sidebar = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation(); // Get the current route
+
   return (
-    <div className="w-64 bg-teal-500 text-white h-screen fixed top-0 left-0 p-6">
-      <h2 className="text-2xl mb-8 font-bold">Heizy</h2>
-      <ul className="space-y-4">
-        <li className="cursor-pointer font-semibold text-teal-200" onClick={() => navigate('/employer/dashboard')} >Dashboard</li>
+    <div className="w-56 bg-teal-500 text-white h-screen fixed top-0 left-0 flex flex-col items-center justify-center">
+      <ul className="space-y-6 w-full text-center">
         <li
-          className="cursor-pointer hover:text-teal-200"
+          className={`cursor-pointer text-lg font-medium ${
+            location.pathname === '/employer/dashboard' ? 'text-white' : 'text-teal-200'
+          } hover:text-white transition-colors`}
+          onClick={() => navigate('/employer/dashboard')}
+        >
+          Dashboard
+        </li>
+        <li
+          className={`cursor-pointer text-lg font-medium ${
+            location.pathname === '/employer/jobs' ? 'text-white' : 'text-teal-200'
+          } hover:text-white transition-colors`}
           onClick={() => navigate('/employer/jobs')}
         >
           Jobs
