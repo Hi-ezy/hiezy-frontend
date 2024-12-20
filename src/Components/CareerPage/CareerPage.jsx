@@ -2,27 +2,42 @@ import React, { useState, useEffect } from 'react';
 import './CareerPage.css';
 
 const CareerPage = () => {
-    
-  // Mock data for jobs
-  const [jobs, setJobs] = useState([
-    { jobid: 1001, title: 'Senior Frontend Developer', location: 'Remote', type: 'Full-time' },
-    { jobid: 1002, title: 'Backend Engineer', location: 'Remote', type: 'Full-time' },
-    { jobid: 10033, title: 'Product Manager', location: 'New York, NY', type: 'Full-time' },
-    { jobid: 1004, title: 'UX Designer', location: 'San Francisco, CA', type: 'Full-time' },
-  ]);
+
+  const [jobs, setJobs] = useState([Array]);
+  
+    useEffect(() => {
+      const fetchJobs = async () => {
+        try {
+          const response = await fetch(`${process.env.REACT_APP_BASE_URL}/app/jobs/getalljobs`); // Replace with your API endpoint
+          if (!response.ok) {
+            throw new Error('Failed to fetch jobs');
+          }
+          const data = await response.json();
+          console.log('Jobs fetched:', data);
+          setJobs(data.response)
+          console.log('Jobs:', jobs);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      fetchJobs();
+    }, []);
 
   return (
     <div className="career-page-container">
+      <button onClick={() => window.history.back()} className="back-btn">Back</button>
       <div className="job-listing-section">
         <h2>Current Job Openings</h2>
         <div className="job-listings">
           {jobs.map((job) => (
-            <div key={job.jobid} className="job-card">
-              <h3>{job.title}</h3>
-              <p>{job.location}</p>
-              <p>{job.type}</p>
+            <div key={job._id} className="job-card">
+              <h2>Company : {job.company}</h2>
+              <h3>Job Title{job.jobTitle}</h3>
+              <p>Job Location : {job.location}</p>
+              <p>Experience Required : {job.experience}</p>
+              <p>Skills Required : {job.skills}</p>
               <button onClick={() => {
-                 window.location.href = `/resume-submit/:${job.jobid}`;}} className="apply-btn">Apply Now</button>
+                 window.location.href = `/resume-submit/${job._id}`;}} className="apply-btn">Apply Now</button>
             </div>
           ))}
         </div>

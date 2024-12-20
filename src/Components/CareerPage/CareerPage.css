@@ -81,4 +81,20 @@
     font-size: 14px;
     color: #9ca3af;
   }
+
+  .back-btn {
+    position: absolute;
+    right:30px;
+    background-color: #36b3a8;
+    border: 1px solid #ddd;
+    font-size: 24px;
+    max-width: 100px;
+    border-radius: 10px;
+    align : right;
+    cursor: pointer;
+  }
+  
+  .back-btn:hover {
+    color: red;
+  }
   

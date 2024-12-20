@@ -117,6 +117,7 @@ export const LoginPage = () => {
         </form>
 
         <a href="/login" className="forgot-password">Forget password?</a>
+        <button onClick={() => window.history.back()} className="close-btn">Back </button>
       </div>
       <div className="login-right">
         {/*<img
@@ -124,7 +125,7 @@ export const LoginPage = () => {
           alt="Woman smiling"
           className="promo-image"
         />*/}
-        <button className="close-btn">×</button>
+
       </div>
     </div>
   );

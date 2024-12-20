@@ -23,15 +23,14 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/interview" element={<VideoInterviewApp />} />
-        <Route path="/hr" element={<CandidateUploader />} />
-        <Route path="/video-interview" element={< VideoInterviewApp/>} />
+        <Route path="/hr" element={<CandidateUploader />} />  
         <Route path="/login" element={< LoginPage/>} />
         <Route path='/career-page' element={<CareerPage/>} />
-        <Route path='/resume-submit/:indexid' element={<ResumeSubmit/>} />
+        <Route path='/resume-submit/indexid' element={<ResumeSubmit/>} />
         <Route path='/employer' element={<EmployerDashboard/>}> 
           <Route path='/employer/dashboard' element={<Dashboard/>} /> 
           <Route path='/employer/jobs' element={<Jobs/>} /> 
-          <Route path="/employer/job-details/:indexId" element={<JobDetails/>} />
+          <Route path="/employer/job-details/indexId" element={<JobDetails/>} />
           <Route path='/employer/jdcreation' element={<JobDescCreator/>} />
         </Route>
         <Route path='/jobs' element={<Jobs/>} />

@@ -293,12 +293,12 @@ body {
   }
   
   .close-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: transparent;
-    border: none;
+    background-color: #36b3a8;
+    border: 1px solid #ddd;
     font-size: 24px;
+    max-width: 70px;
+    border-radius: 10px;
+    align : center;
     cursor: pointer;
   }
   
