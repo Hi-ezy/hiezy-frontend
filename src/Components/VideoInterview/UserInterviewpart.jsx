@@ -59,7 +59,7 @@ const CandidateView = ({ setCandidateResponse }) => {
   return (
     <div className="flex flex-col w-full h-screen">
       {/* Video Section - Positioned in top right corner */}
-      <div className="absolute w-1/3 top-4 right-4 h-2/3">
+      <div className="h-[50%] w-full mt-4 top-4 right-4">
         <div className="relative h-full">
           <video
             ref={videoRef}
@@ -86,12 +86,12 @@ const CandidateView = ({ setCandidateResponse }) => {
       </div>
 
       {/* Transcription Area - Fixed to bottom */}
-      <div className="fixed bottom-0 right-0 w-1/2 bg-white shadow-lg">
+      <div className="h-[50%] my-4 rounded-lg w-full bg-white shadow-lg">
         <div className="p-6">
           <textarea
             value={transcript || inputText}
             onChange={(e) => setInputText(e.target.value)}
-            className="w-full h-40 p-4 mb-4 text-lg border-2 rounded-lg shadow-lg"
+            className="w-full h-full p-4 mb-6 text-lg border-2 rounded-lg shadow-lg"
             placeholder="Your speech will appear here..."
           />
           <div className="flex flex-row items-center justify-between">
@@ -99,12 +99,12 @@ const CandidateView = ({ setCandidateResponse }) => {
               <button
                 onClick={resetTranscript}
                 className="p-4 text-white bg-yellow-500 rounded-full hover:bg-yellow-600">
-                <BiReset className="w-8 h-8" />
+                <BiReset className="w-5 h-5" />
               </button>
               <button
                 onClick={(e) => handleText(e)}
                 className="p-4 text-white bg-blue-500 rounded-full hover:bg-blue-600">
-                <BiSend className="w-8 h-8" />
+                <BiSend className="w-5 h-5" />
               </button>
             </div>
             
@@ -117,7 +117,7 @@ const CandidateView = ({ setCandidateResponse }) => {
                 }`}
                 onClick={isTranscribing ? stopTranscription : startTranscription}>
                 {isTranscribing ? 
-                <FaMicrophone className="w-8 h-8"/>:  <FaMicrophoneSlash className="w-8 h-8"/> 
+                <FaMicrophone className="w-5 h-5"/>:  <FaMicrophoneSlash className="w-5 h-5"/> 
                   }
               </button>
             </div>

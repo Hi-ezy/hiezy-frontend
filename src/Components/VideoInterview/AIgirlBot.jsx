@@ -74,6 +74,7 @@ const jobId = localStorage.getItem("jobId")
             <video
               ref={videoRef}
               className="object-cover w-full h-full rounded-lg shadow-xl"
+              style={{ objectPosition: 'center 0' }} 
               autoPlay
               muted
               src="/assets/video_interview_model.mp4"
