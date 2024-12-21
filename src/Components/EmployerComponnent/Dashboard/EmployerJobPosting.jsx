@@ -33,7 +33,7 @@ const Jobs = () => {
       <div className="w-[85%] mx-auto p-8 mt-8 min-h-screen">
         <div className="flex items-center justify-between mb-6">
           <div className='mb-6'>
-            <h3 className="mb-1 text-left text-2xl">Open Positions</h3>
+            <h3 className="mb-1 text-left font-semibold text-2xl">Open Positions</h3>
             <p className="text-[#6B7280]">Manage and track all your job postings</p>
           </div>
           <button
@@ -47,14 +47,14 @@ const Jobs = () => {
         <div className="grid grid-cols-2 gap-6">
           {jobs.map((job) => (
             <div key={job._id} className="p-6 bg-white rounded-lg shadow">
-              <div className="flex justify-between mb-4">
+              <div className="flex text-left justify-between mb-4">
                 <div>
-                  <h4 className="text-lg font-semibold">{job.jobTitle}</h4>
+                  <h4 className="text-lg font-medium">{job.jobTitle}</h4>
                   <p className="text-sm text-[#6B7280]">
                       {job.location}
                   </p>
                 </div>
-                <span className="bg-[#D1FAE5] text-[#10B981] px-3 py-1 rounded-full text-xs">
+                <span className="bg-[#D1FAE5] text-[#10B981] flex items-center justify-center px-3 py-1 rounded-full text-xs">
                   open
                 </span>
               </div>
