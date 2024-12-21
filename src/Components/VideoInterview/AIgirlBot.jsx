@@ -1,70 +1,94 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSpeechSynthesis } from 'react-speech-kit';
 import 'tailwindcss/tailwind.css';
 import useAiConversion from './video-interview-daa-fetch.js/ai-bot-data';
 
 const AIGirl = ({ candidateResponse }) => {
   const { getAIResponse } = useAiConversion();
-  const { speak } = useSpeechSynthesis();
-  const [aiResponse, setAiResponse] = useState("");
+  const [aiResponse, setAiResponse] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const videoRef = useRef(null);
-const sessionId = localStorage.getItem("sessionId")
-const jobId = localStorage.getItem("jobId")
+
+  const sessionId = localStorage.getItem('sessionId');
+  const jobId = localStorage.getItem('jobId');
+
   useEffect(() => {
     const fetchAIResponse = async () => {
-      const p_body = {
-        question: candidateResponse,
-        sessionID: sessionId,
-        jobId: jobId,
-        phase: 'interaction',
-      };
+      try {
+        setIsLoading(true);
 
-      const data = await getAIResponse(JSON.stringify(p_body));
-      if (data) {
-        setAiResponse(data.response); // Assuming `response` contains the AI's answer
-        handleSpeak(data.response);
+        // Prepare request payload
+        const p_body = {
+          question: candidateResponse,
+          sessionID: sessionId,
+          jobId: jobId,
+          phase: 'interaction',
+        };
 
-        // Play video when response starts
-        if (videoRef.current) {
-          videoRef.current.play();
+        // Call the backend to get the AI response
+        const data = await getAIResponse(JSON.stringify(p_body));
+
+        if (data?.response) {
+          setAiResponse('AI is responding...'); // Show placeholder while streaming audio
+          
+          // Connect to the WebSocket for audio playback
+          const audioWebSocket = new WebSocket(data.response);
+
+          audioWebSocket.onopen = () => {
+            console.log('WebSocket connection established');
+          };
+
+          audioWebSocket.onmessage = (event) => {
+            const { audioBase64 } = JSON.parse(event.data);
+            if (audioBase64) {
+              // Convert Base64 to Blob and create an object URL for the audio
+              const audioBlob = new Blob(
+                [Uint8Array.from(atob(audioBase64), (c) => c.charCodeAt(0))],
+                { type: 'audio/mpeg' }
+              );
+              const audioUrl = URL.createObjectURL(audioBlob);
+
+              // Play video and audio together
+              if (videoRef.current) {
+                videoRef.current.play();
+              }
+
+              const audio = new Audio(audioUrl);
+              audio.play();
+
+              // Handle audio completion
+              audio.onended = () => {
+                if (videoRef.current) {
+                  videoRef.current.pause();
+                  videoRef.current.currentTime = 0; // Reset video
+                }
+              };
+            }
+          };
+
+          audioWebSocket.onclose = () => {
+            console.log('WebSocket connection closed');
+            setAiResponse(''); // Clear placeholder
+          };
+
+          audioWebSocket.onerror = (error) => {
+            console.error('WebSocket error:', error);
+            setAiResponse('Error streaming AI response');
+          };
+        } else {
+          console.error('No response from AI');
         }
-
-        // Stop video when response finishes
-        // const utterance = new SpeechSynthesisUtterance(data.response);
-        // utterance.onend = () => {
-        //   if (videoRef.current) {
-        //     videoRef.current.pause();
-        //     videoRef.current.currentTime = 0; // Reset video to the start
-        //   }
-        // };
-
-        // window.speechSynthesis.speak(utterance);
+      } catch (error) {
+        console.error('Error fetching AI response:', error);
+        setAiResponse('Error fetching AI response');
+      } finally {
+        setIsLoading(false);
       }
     };
 
     if (candidateResponse) {
       fetchAIResponse();
     }
-  }, [candidateResponse, getAIResponse]);
-
-  const handleSpeak = (text) => {
-    const voices = window.speechSynthesis.getVoices();
-    const femaleVoice = voices.find(voice => voice.gender === 'female' || voice.name.includes('Female') || voice.name.includes('Google UK English Female')); // Adjust criteria as needed
-  
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "en-IN";
-    utterance.rate = 1;
-    utterance.pitch = 1;
-  
-    if (femaleVoice) {
-      utterance.voice = femaleVoice;
-    } else {
-      console.warn('No female voice found, using default voice.');
-    }
-  
-    window.speechSynthesis.speak(utterance);
-  };
-  
+  }, [candidateResponse, getAIResponse, sessionId, jobId]);
 
   return (
     <div className="h-screen bg-gray-100">
@@ -74,7 +98,7 @@ const jobId = localStorage.getItem("jobId")
             <video
               ref={videoRef}
               className="object-cover w-full h-full rounded-lg shadow-xl"
-              style={{ objectPosition: 'center 0' }} 
+              style={{ objectPosition: 'center 0' }}
               autoPlay
               muted
               src="/assets/video_interview_model.mp4"
@@ -85,7 +109,7 @@ const jobId = localStorage.getItem("jobId")
               className="w-full h-full p-4 text-lg border-2 rounded-lg shadow-lg resize-none"
               value={aiResponse}
               readOnly
-              placeholder="AI response will be here..."
+              placeholder={isLoading ? 'Loading AI response...' : 'AI response will be here...'}
             />
           </div>
         </div>
@@ -95,4 +119,3 @@ const jobId = localStorage.getItem("jobId")
 };
 
 export default AIGirl;
-
