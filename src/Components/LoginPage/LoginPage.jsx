@@ -1,133 +1,92 @@
-import {React, useState} from 'react'
-import './LoginPage.css'; // Link to the CSS file
-import { useHandleSubmit } from './loginPage';
-
-/*import {React, useState} from 'react'
-import './LoginPage.css'
-import { FaLock, FaUnlock, FaUser } from "react-icons/fa";
-import { handleSubmit } from './loginPage';
+import { React, useState } from 'react'
+import { useHandleSubmit } from './loginPage'
+import { useNavigate } from 'react-router-dom';
 
 export const LoginPage = () => {
-    const [showPassword, setShowPassword] = useState(false);
-    const [errorState, setErrorState] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useHandleSubmit()
+  const [errorState, setErrorState] = useState(false)
 
-    const handleShowPassword = () => {
-        setShowPassword(!showPassword);
-      };
-    
-      const handleFormSubmit = (event) => {
-        event.preventDefault();
-        // //validatoion
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-       console.log('username :'+username,'password :'+password);
-       
-        // //call api wrapper.
-        // if (username === 'admin' && password === 'password') {
-        //   console.log('Login successful!');
-        //   window.location.href = '/hr';
-        // } else {
-        //   console.log('Invalid username or password');
-        //   setErrorState(true);
-        // }
+  const handleFormSubmit = (event) => {
+    event.preventDefault()
+    const email = document.getElementById('email').value
+    const password = document.getElementById('password').value
+    console.log('email :', email, 'password :', password)
+    login(event, email, password, setErrorState)
+    setErrorState(true)
+  }
 
-        handleSubmit(event, username, password, setErrorState);
-      }
-    
   return (
-    <div className='wrapper'>
-        <form action="">
-            <h1>Login</h1>
-            <div className='input-box'>
-                <input id='username'    type='text' placeholder='Username' required/>
-                <FaUser className='icon'/>
+    <>
+      <nav className="fixed z-40 w-full shadow-lg bg-[#ffffffbc] backdrop-blur-sm py-2 top-0">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 relative ">
+            {/* Left Section */}
+            <div onClick={() => navigate('/')} className="flex cursor-pointer my-1 items-center justify-start">
+              <img className="h-12" src="/assets/HiezyLogo1.png" alt="Hiezy" />
+              <h2 className="text-2xl mx-4 pt-5 text-[#30d5c7] font-semibold">HiEzy</h2>
             </div>
-            <div className='input-box'>
-                <input id='password' type={showPassword ? 'text' : 'password'} placeholder='Password' required/>
-                <span onClick={handleShowPassword}>
-                    {showPassword ? <FaUnlock className='icon'/>:<FaLock className='icon'/>
-                    }
-                </span> 
-            </div>
-            <div className="remember-forgot">
-                <label><input type="checkbox" /> Remember me </label>
-                <a href="#">Forgot Password</a>
-            </div>
+          </div>
+        </div>
+      </nav>
+      <div className="flex justify-between max-w-7xl mx-auto mt-28 mb-12 bg-white rounded-lg shadow-lg">
 
-           
-            <button type='submit' onClick={() => { window.location.href = "/MainPage"; }}>Login</button>
+        {/* Left Panel (Login) */}
+        <div className="flex flex-col justify-between p-10 w-1/2">
 
-            <div className="login-register">
-                <p>Don't have an account? <a href="#"> Register </a></p>
-            </div>
+          <p className="text-lg mb-4">
+            New to HiEzy?{' '}
+            <span
+              className="text-blue-500 cursor-pointer"
+              onClick={() => window.location.href = '/signup'}
+            >
+              Sign up
+            </span>
+          </p>
 
-        </form>
-    </div>
-  );
+          <form onSubmit={handleFormSubmit} className="flex flex-col">
+            <input
+              id="email"
+              type="email"
+              placeholder="Email"
+              required
+              className="p-3 mb-5 border border-gray-300 rounded-lg text-lg"
+            />
+            <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              required
+              className="p-3 mb-5 border border-gray-300 rounded-lg text-lg"
+            />
+            <button
+              type="submit"
+              className="p-3 bg-teal-500 text-white  rounded-full text-lg cursor-pointer mb-5"
+            >
+              Log in
+            </button>
+
+            {errorState && <p className="text-red-500 text-sm">Invalid username or password</p>}
+          </form>
+
+          <a href="/login" className="text-sm text-gray-600 mb-5 hover:underline">
+            Forget password?
+          </a>
+        </div>
+
+        {/* Right Panel (Promo Image) */}
+        <div
+          className="relative w-1/2 bg-cover bg-center rounded-tr-lg rounded-br-lg"
+          style={{ backgroundImage: "url('../Assets/women_hr.jpg')" }}
+        >
+          {/* Optional promotional bubble */}
+          {/* <div className="absolute top-5 left-5 bg-white p-4 rounded-lg shadow-lg max-w-xs">
+          <p>Bubble message content here</p>
+        </div> */}
+        </div>
+      </div>
+    </>
+  )
 }
 
-export default LoginPage*/
-
- /*<button type='submit' onClick={handleFormSubmit}>Login</button>*/
- /*{errorState && <p className="error">Invalid username or password</p>}*/
-
-
-export const LoginPage = () => {
-  /*const [showPassword, setShowPassword] = useState(false);
-    const [errorState, setErrorState] = useState(false);
-
-    const handleShowPassword = () => {
-        setShowPassword(!showPassword);
-      };*/
-      const {login}= useHandleSubmit()
-      const [errorState, setErrorState] = useState(false);
-      const handleFormSubmit = (event) => {
-
-        event.preventDefault();
-        // //validatoion
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-       console.log('email :'+email,'password :'+password);
-       
-        //call api wrapper.
-        login(event, email, password, setErrorState);
-        setErrorState(true);
-      };
-
-  return (
-    <div className="login-container">
-      <div className="login-left">
-        <h2>Join Hiezy for more...</h2>
-        <ul>
-          <li>Post Job Description</li>
-          <li>AI Resume Screening</li>
-          <li>AI-Powered Interviews</li>
-        </ul>
-
-        <p>New to Hiezy? <span className="signup-link" onClick={() => window.location.href = '/signup'}>Sign up</span></p>
-
-        <form>
-          <input id ='email' type="email" placeholder="Email" required />
-          <input id='password' type="password" placeholder="password" required />
-          <button type='submit' className="continue-btn" 
-          onClick={handleFormSubmit}>Continue</button>
-        
-          {/*set error message*/}
-          {errorState && <p className="error">Invalid username or password</p>}
-        </form>
-
-        <a href="/login" className="forgot-password">Forget password?</a>
-        <button onClick={() => window.history.back()} className="close-btn">Back </button>
-      </div>
-      <div className="login-right">
-        {/*<img
-          src="../Assets/women_hr.jpg"
-          alt="Woman smiling"
-          className="promo-image"
-        />*/}
-
-      </div>
-    </div>
-  );
-};
-export default LoginPage;
+export default LoginPage

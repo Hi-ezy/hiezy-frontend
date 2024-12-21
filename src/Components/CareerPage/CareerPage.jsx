@@ -30,20 +30,11 @@ const CareerPage = () => {
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 relative ">
             {/* Left Section */}
-            <div onClick={() => navigate('./')} className="flex cursor-pointer my-1 items-center justify-start">
+            <div onClick={() => navigate('/')} className="flex cursor-pointer my-1 items-center justify-start">
               <img className="h-12" src="/assets/HiezyLogo1.png" alt="Hiezy" />
               <h2 className="text-2xl mx-4 pt-5 text-[#30d5c7] font-semibold">HiEzy</h2>
             </div>
 
-            {/* Right Section */}
-            <div className='z-50'>
-              <button
-                onClick={() => navigate(-1)}
-                className="bg-teal-500 border px-6 py-1 border-gray-300 text-lg text-white rounded-full cursor-pointer hover:bg-indigo-600"
-              >
-                Back
-              </button>
-            </div>
           </div>
         </div>
       </nav>

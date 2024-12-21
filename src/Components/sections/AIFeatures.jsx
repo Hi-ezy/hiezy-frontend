@@ -39,7 +39,7 @@ export default function AIFeatures() {
         >
           <path
             d="M0 100C300 150 600 0 900 100C1200 200 1500 0 1800 100V300H0V100Z"
-            fill="#30d5c7"
+            fill="blue"
           />
         </svg>
       </div>
