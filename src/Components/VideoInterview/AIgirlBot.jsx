@@ -28,7 +28,7 @@ const AIGirl = ({ candidateResponse }) => {
         const data = await getAIResponse(JSON.stringify(p_body));
 
         if (data?.response) {
-          setAiResponse('AI is responding...'); // Show placeholder while streaming audio
+          setAiResponse(data?.response?.aiResponse); // Show placeholder while streaming audio
           
           // Connect to the WebSocket for audio playback
           const audioWebSocket = new WebSocket(data.response);
