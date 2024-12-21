@@ -4,7 +4,7 @@ export default function useHandleResume() {
   const navigate = useNavigate()
   const handleResume = async (formData)=>{
       try{
-        const response = await fetch(`${BASEURL}/app/candidate/upload-resume`, {
+        const response = await fetch(`${BASEURL}/app/resume/upload-resume`, {
             method: 'POST',
             body: formData,
           });
