@@ -22,7 +22,7 @@ export default function Navbar() {
         {/* Buttons */}
         <div className="hidden md:flex space-x-4">
           <button
-            className="px-4 py-2 text-sm border-2 border-black hover:border-white text-gray-600 rounded-full hover:text-indigo-600"
+            className="px-4 py-2 text-sm border-2 border-[#30d5c7] text-[#30d5c7] hover:border-white rounded-full hover:text-indigo-600"
             onClick={() => navigate("./login")}
           >
             Employer Login
