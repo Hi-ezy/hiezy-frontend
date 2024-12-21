@@ -5,10 +5,10 @@ const Dashboard = () => {
   return (
     <div className="flex mt-12 w-full">
       {/* Main Content */}
-      <div className="ml-64 p-8 w-full bg-gray-100 min-h-screen text-gray-800 overflow-y-auto">
+      <div className="p-8 mt-6 w-[85%] mx-auto min-h-screen text-gray-800 overflow-y-auto">
         {/* Overview Section */}
-        <div className="mb-8">
-          <h3 className="text-2xl font-bold my-4">Dashboard Overview</h3>
+        <div className="mb-10">
+          <h3 className="text-2xl font-bold my-2">Dashboard Overview</h3>
           <p className="text-gray-600">Welcome back! Here's what's happening today.</p>
 
           {/* Stats Section */}

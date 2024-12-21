@@ -40,12 +40,13 @@ const CareerPage = () => {
       </nav>
 
       <div className="relative p-20 flex flex-col items-center bg-gray-50">
+        <h1 className='text-2xl font-semibold mt-10 text-gray-500'>Job Postings</h1>
         <div className="w-full max-w-7xl my-10">
           {jobs.map((job) => (
-            <div key={job._id} className="bg-white p-5 rounded-lg shadow-lg flex justify-between w-full transition-transform transform hover:translate-y-[-5px]">
+            <div key={job._id} className="bg-white p-5 my-3 rounded-lg shadow-lg flex justify-between w-full transition-transform transform hover:translate-y-[-5px]">
               <div className='text-left'>
                 <h3 className="text-lg text-gray-900">{job.jobTitle}</h3>
-                <h3 className="text-gray-600 text-sm">{job.experience} work experience</h3>
+                <h3 className="text-gray-600 text-sm">{job.experience}</h3>
               </div>
               {/* <h3 className="text-gray-900 text-sm">{job.company}</h3> */}
               {/* <p className="text-gray-600 text-base mb-1">Job Location: {job.location}</p>

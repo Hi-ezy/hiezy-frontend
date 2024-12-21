@@ -30,10 +30,10 @@ const Jobs = () => {
 
   return (
     <div className="flex w-full mt-16">
-      <div className="ml-[250px] p-8 w-full bg-[#f0f0f0] min-h-screen">
+      <div className="w-[85%] mx-auto p-8 mt-8 min-h-screen">
         <div className="flex items-center justify-between mb-6">
-          <div>
-            <h3 className="mb-1 text-2xl">Open Positions</h3>
+          <div className='mb-6'>
+            <h3 className="mb-1 text-left text-2xl">Open Positions</h3>
             <p className="text-[#6B7280]">Manage and track all your job postings</p>
           </div>
           <button
@@ -70,7 +70,7 @@ const Jobs = () => {
               </div>
               <div className="flex justify-between">
                 <button
-                  className="bg-[#6366F1] text-white px-4 py-2 rounded hover:bg-[#4F46E5]"
+                  className="bg-[#30d5c7] text-white px-4 py-2 rounded hover:bg-[#4F46E5]"
                   onClick={() => navigate(`/employer/job-details/${job._id}`)}
                 >
                   View Job
