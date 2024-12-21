@@ -16,6 +16,7 @@ import JobDetails from './Components/EmployerComponnent/Dashboard/ViewJobs.jsx';
 import CareerPage from './Components/CareerPage/CareerPage.jsx';
 import ResumeSubmit from './Components/CareerPage/ResumeSubmit.jsx';
 import EmployerDashboard from './Components/EmployerComponnent/Dashboard/EmployerDashboard.jsx';
+import CandidateInsights from './Components/InsightDashboard/CandidateInsights.jsx';  
 function App() {
   return (
     <div className="App">
@@ -32,6 +33,7 @@ function App() {
           <Route path='/employer/jobs' element={<Jobs/>} /> 
           <Route path="/employer/job-details/:indexid" element={<JobDetails/>} />
           <Route path='/employer/jdcreation' element={<JobDescCreator/>} />
+          <Route path='/employer/candidate/:candidateId' element={<CandidateInsights/>} />
         </Route>
         <Route path='/jobs' element={<Jobs/>} />
         <Route path='/signup' element={<Signup/>} />

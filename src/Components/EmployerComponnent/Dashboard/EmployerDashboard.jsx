@@ -9,7 +9,7 @@ const EmployerDashboard = () => {
     <div className="flex">
       {/* Topbar and Sidebar */}
       <Topbar />
-      <Sidebar />
+     
 
       {/* Main Content */}
         <Outlet />

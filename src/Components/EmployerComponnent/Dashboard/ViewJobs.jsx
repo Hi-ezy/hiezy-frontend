@@ -19,6 +19,8 @@ const JobDetails = () => {
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
   const [candidateData, setCandidateData] = useState([Array]);
+  const [resumeMatchData, setResumeMatchData] = useState([]);
+  const [statusData,setStatusData] = useState([]);
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -54,6 +56,15 @@ const JobDetails = () => {
     fetchCandidate();
   }, []);
 
+  useEffect(() => {
+    if (candidateData.length > 0) {
+      const matchData = getResumeMatchData(candidateData);
+      setResumeMatchData(matchData);
+      const statusData = getCandidateStatusData(candidateData);
+      setStatusData(statusData);
+    }
+  }, [candidateData]);
+
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating / 20); // full stars (out of 5)
     const halfStar = rating % 20 >= 10 ? 1 : 0; // half star if rating is >= 10
@@ -73,47 +84,94 @@ const JobDetails = () => {
   };
 
 
-  const resumeMatchData = [
-    { criteria: "Below 40%", value: 30 },
-    { criteria: "40-60%", value: 53 },
-    { criteria: "60-80%", value: 71 },
-    { criteria: "Above 80%", value: 89 },
-  ];
+  const getResumeMatchData = (candidateData) => {
+    const scoreRanges = {
+      "Below 30%": 0,
+      "30-55%": 0,
+      "55-80%": 0,
+      "Above 80%": 0
+    };
 
-  const timeTaken = [
-    { process: "Sourcing (Job creation, Job posting, Resume fetching)", value: "2" },
-    { process: "Pre-screening", value: "3" },
-    { process: "Candidate selection", value: "3" },
-  ];
+    candidateData.forEach(candidate => {
+      const score = candidate.resume_score;
+      if (score < 30) {
+        scoreRanges["Below 30%"]++;
+      } else if (score >= 30 && score < 55) {
+        scoreRanges["30-55%"]++;
+      } else if (score >= 55 && score < 80) {
+        scoreRanges["55-80%"]++;
+      } else {
+        scoreRanges["Above 80%"]++;
+      }
+    });
 
-  const candidateSatisfaction = { value: 79 };
+    return Object.entries(scoreRanges).map(([criteria, value]) => ({
+      criteria,
+      value
+    }));
+  };
+
+
   
  /*will comment once the candidate data is fetched from the backend*/
 
   const resumePieData = {
-    labels: resumeMatchData.map((item) => item.criteria),
+    labels: getResumeMatchData(candidateData).map((item) => item.criteria),
     datasets: [
       {
         label: "Resume Match",
-        data: resumeMatchData.map((item) => item.value),
+        data: getResumeMatchData(candidateData).map((item) => item.value),
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50"],
         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50"],
       },
     ],
   };
 
-  // Data for Time Taken Pie Chart
-  const timePieData = {
-    labels: timeTaken.map((item) => item.process),
-    datasets: [
-      {
-        label: "Time Taken (in days)",
-        data: timeTaken.map((item) => item.value),
-        backgroundColor: ["#F44336", "#2196F3", "#FFC107"],
-        hoverBackgroundColor: ["#E53935", "#1E88E5", "#FFB300"],
-      },
-    ],
+  const getCandidateStatusData = (candidateData) => {
+    const statusCounts = {
+      "Applied": 0,
+      "Shortlisted": 0,
+      "Interviewed": 0,
+      "Hired": 0,
+      "Rejected": 0
+    };
+  
+    candidateData.forEach(candidate => {
+      const status = candidate.candidate_status;
+      if (status in statusCounts) {
+        statusCounts[status]++;
+      }
+    });
+  
+    return Object.entries(statusCounts).map(([status, count]) => ({
+      process: status,
+      value: count
+    }));
   };
+
+const timePieData = {
+  labels: statusData.map((item) => item.process),
+  datasets: [
+    {
+      label: "Candidate Status",
+      data: statusData.map((item) => item.value),
+      backgroundColor: [
+        "#4CAF50", // Applied - Green
+        "#2196F3", // Shortlisted - Blue
+        "#FFC107", // Interviewed - Yellow
+        "#9C27B0", // Hired - Purple
+        "#F44336"  // Rejected - Red
+      ],
+      hoverBackgroundColor: [
+        "#43A047",
+        "#1E88E5",
+        "#FFB300",
+        "#8E24AA",
+        "#E53935"
+      ],
+    },
+  ],
+};
 
   return (
     <div className="w-[80%] ml-64 my-20">
@@ -147,7 +205,7 @@ const JobDetails = () => {
 
         {/* Time Taken Distribution */}
         <div className="p-6 bg-white rounded-lg shadow">
-          <h4 className="mb-4 text-xl font-medium">Time Taken Distribution</h4>
+          <h4 className="mb-4 text-xl font-medium">Candidate Status Distribution</h4>
           <div className="flex items-center justify-center">
             <div style={{ width: "350px", height: "350px" }}>
               <Pie data={timePieData} />
@@ -176,7 +234,11 @@ const JobDetails = () => {
                 <tr
                   key={index}
                   className="border-b cursor-pointer hover:bg-gray-100"
-                  onClick={() => navigate(`/candidate/${candidate._id}`)}
+                  onClick={() => {
+                    if(candidate.interview_status === 'Completed') {
+                      navigate(`/employer/candidate/${candidate._id}`);
+                    }
+                  }}
                 >
                   <td className="p-3">
                     <div className="flex items-center justify-center h-full">{candidate.name}</div>
