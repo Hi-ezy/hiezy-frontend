@@ -18,7 +18,7 @@ const JobDetails = () => {
   console.log('index_id:', indexid);
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
-  /*const [candidateData, setCandidateData] = useState([Array]);*/
+  const [candidateData, setCandidateData] = useState([Array]);
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -37,10 +37,10 @@ const JobDetails = () => {
     fetchJobs();
   }, []);
 
-  /* useEffect(() => {
+   useEffect(() => {
     const fetchCandidate = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/app/candidate/getallcandidate`);
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/app/candidatedata/byjob?jobID=${indexid}`);
         if (!response.ok) {
           throw new Error('Failed to fetch candidate');
         }
@@ -52,7 +52,7 @@ const JobDetails = () => {
       }
     };
     fetchCandidate();
-  }, []);*/
+  }, []);
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating / 20); // full stars (out of 5)
@@ -89,20 +89,6 @@ const JobDetails = () => {
   const candidateSatisfaction = { value: 79 };
   
  /*will comment once the candidate data is fetched from the backend*/
-  const candidateData = [
-    {
-      candidate: "John",
-      questionsAttempted: 5,
-      questionsAnswered: 4,
-      score: 75
-    },
-    {
-      candidate: "Vivek",
-      questionsAttempted: 5,
-      questionsAnswered: 2,
-      score: 30
-    },
-  ];
 
   const resumePieData = {
     labels: resumeMatchData.map((item) => item.criteria),
@@ -170,25 +156,18 @@ const JobDetails = () => {
         </div>
       </div>
 
-      {/* Candidate Satisfaction Section */}
-      <div className="p-6 mb-8 bg-white rounded-lg shadow">
-        <h4 className="text-xl font-medium">Candidate Satisfaction</h4>
-        <div className="flex items-center justify-center mt-4">
-            {renderStars(candidateSatisfaction.value)}
-          <span className="ml-4 font-bold text-teal-600">{candidateSatisfaction.value}%</span>
-        </div>
-      </div>
-
       {/* Candidate Table */}
       <div className="p-6 bg-white rounded-lg shadow">
-        <h4 className="mb-4 text-xl font-medium">Candidates</h4>
+        <h4 className="mb-4 text-xl font-medium">Candidates List</h4>
         <table className="w-full border-collapse table-auto">
           <thead>
             <tr className="text-gray-600 bg-gray-200">
-              <th className="p-3 font-semibold text-center">Candidate</th>
-              <th className="p-3 font-semibold text-center">Questions Attempted</th>
-              <th className="p-3 font-semibold text-center">Questions Answered</th>
-              <th className="p-3 font-semibold text-center">Score</th>
+              <th className="p-3 font-semibold text-center">Candidate Name</th>
+              <th className="p-3 font-semibold text-center">Email </th>
+              <th className="p-3 font-semibold text-center">Resume Score</th>
+              <th className="p-3 font-semibold text-center">Interview Status</th>
+              <th className="p-3 font-semibold text-center">Candidate Status</th>
+
             </tr>
           </thead>
           <tbody>
@@ -197,20 +176,24 @@ const JobDetails = () => {
                 <tr
                   key={index}
                   className="border-b cursor-pointer hover:bg-gray-100"
-                  onClick={() => navigate(`/candidate/${candidate.id}`)}
+                  onClick={() => navigate(`/candidate/${candidate._id}`)}
                 >
                   <td className="p-3">
-                    <div className="flex items-center justify-center h-full">{candidate.candidate}</div>
+                    <div className="flex items-center justify-center h-full">{candidate.name}</div>
                   </td>
                   <td className="p-3">
-                    <div className="flex items-center justify-center h-full">{candidate.questionsAttempted}</div>
+                    <div className="flex items-center justify-center h-full">{candidate.email}</div>
                   </td>
                   <td className="p-3">
-                    <div className="flex items-center justify-center h-full">{candidate.questionsAnswered}</div>
+                    <div className="flex items-center justify-center h-full">{candidate.resume_score}</div>
                   </td>
                   <td className="p-3">
-                    <div className="flex items-center justify-center h-full">{candidate.score}</div>
+                    <div className="flex items-center justify-center h-full">{candidate.interview_status}</div>
                   </td>
+                  <td className="p-3">
+                    <div className="flex items-center justify-center h-full">{candidate.candidate_status}</div>
+                  </td>
+  
                 </tr>
               ))
             ) : (
